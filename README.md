@@ -1,16 +1,17 @@
-# React + Vite
+# Redux Practice Projects
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains my practice projects while learning **Redux** with **React**.
 
-Currently, two official plugins are available:
+I am currently practicing state management and building small applications using Redux.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Branches
 
-## React Compiler
+* **flight-booking** – A simple flight booking application to practice Redux state management.
+  Branch: https://github.com/your-username/your-repo/tree/flight-booking
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **to-do-app** – A basic todo application to practice Redux actions, reducers, and store.
+  Branch: https://github.com/your-username/your-repo/tree/to-do-app
 
-## Expanding the ESLint configuration
+## Purpose
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+I created these projects to learn and practice how Redux works in real applications.
