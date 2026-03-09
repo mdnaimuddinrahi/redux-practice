@@ -1,16 +1,87 @@
-# React + Vite
+# 📝 To-Do List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and efficient **Task Management Application** built to practice state management and UI interactions. This app allows users to manage daily tasks with priority colors, completion tracking, and filtering options.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- ➕ **Add Task** – Add new tasks to your list.
+- ❌ **Delete Task** – Remove tasks that are no longer needed.
+- 🎨 **Set Priority Colors**
+  - 🔴 **Red** – High Priority
+  - 🟢 **Green** – Medium Priority
+  - 🟡 **Yellow** – Low Priority
+- ✔️ **Mark Task as Complete**
+- 📋 **Complete All Tasks**
+- 🧹 **Clear All Tasks**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🔎 Filtering Options
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+You can filter tasks based on status and priority.
+
+- 📄 **All Tasks** – Show every task
+- ✅ **Completed Tasks**
+- ⏳ **Incomplete Tasks**
+- 🔴 **Red Priority Tasks**
+- 🟢 **Green Priority Tasks**
+- 🟡 **Yellow Priority Tasks**
+
+---
+
+## 📊 Task Counter
+
+The application shows how many tasks are still incomplete.
+
+Example:
+
+🧮 **3 Tasks Left**
+
+This helps users easily track their remaining work.
+
+---
+
+## 🛠️ Technologies Used
+
+- ⚛️ React
+- 🔄 Redux / Redux Toolkit
+- 🎨 CSS / Tailwind CSS
+- 📜 JavaScript (ES6+)
+
+---
+
+## 📂 Project Purpose
+
+This project was created to **practice and learn state management** concepts including:
+
+- Managing global state
+- Updating tasks dynamically
+- Filtering tasks
+- Handling multiple UI actions efficiently
+
+---
+
+## 📋 Application Functions
+
+| Feature | Description |
+|--------|-------------|
+| Add Task | Add a new task |
+| Delete Task | Remove a task |
+| Priority Color | Set task priority |
+| Complete Task | Mark a task as finished |
+| Complete All | Mark all tasks completed |
+| Clear All | Remove all tasks |
+| Filter Tasks | Filter by status or color |
+| Task Counter | Show remaining tasks |
+
+---
+
+## 📌 Conclusion
+
+This To-Do List application demonstrates a simple **task management system** with useful features such as **priority colors, filtering, completion tracking, and task counting**.
+
+---
+
+⭐ This project was built for **learning and practicing Redux state management with React**.
