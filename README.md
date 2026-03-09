@@ -1,16 +1,39 @@
-# React + Vite
+# Flight Booking App ✈️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple Flight Booking application built while learning **Redux** with **React**. The project is created to practice state management using Redux and understand how actions, reducers, and the store work together.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Add new flight bookings
+* Manage booking information using Redux store
+* Display booking list in a table
+* Limit the number of bookings
+* Practice Redux state updates and component interaction
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* Redux / Redux Toolkit
+* JavaScript
+* HTML
+* Tailwind CSS
 
-## Expanding the ESLint configuration
+## Purpose of This Project
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The main purpose of this project is to practice and understand how Redux works in a real application. It helped me learn how to manage global state, create reducers, and dispatch actions from React components.
+
+## Project Branch
+
+This project is available in the **flight-booking** branch.
+
+Branch Link:
+https://github.com/your-username/your-repository/tree/flight-booking
+
+## Learning Outcome
+
+Through this project, I practiced:
+
+* Redux store configuration
+* Creating reducers and actions
+* Managing application state
+* Connecting Redux with React components
