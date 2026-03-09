@@ -1,4 +1,4 @@
-import { ADDED, CLEARCOMPLETED, COLORSELECTED, DELETED, TOGGLED } from "./actionTypes"
+import { ADDED, CLEARCOMPLETED, COLORSELECTED, DELETED, TOGGLED, ALLCOMPLETED } from "./actionTypes"
 
 
 export const added = (text) => {
