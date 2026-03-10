@@ -1,9 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ROUTE_GROCERY, ROUTE_CHECKOUT } from "../../redux/grocery/actionTypes";
 import {updateRoute} from "../../redux/grocery/actionCreators"
 
 const Navbar = () => {
     const dispatch = useDispatch();
+    const totalCart = useSelector(state => state.grocery?.cart?.length || 0);
     const handleRoute = (route) => {
         dispatch(updateRoute(route));
     }
@@ -21,7 +22,7 @@ const Navbar = () => {
             </button>
             <button className="navCart" id="cart" onClick={() => handleRoute(ROUTE_CHECKOUT)}>
             <i className="text-xl fa-sharp fa-solid fa-bag-shopping"></i>
-                <span id="totalCart">0</span>
+                <span id="totalCart">{totalCart}</span>
             </button>
         </div>
         </div>

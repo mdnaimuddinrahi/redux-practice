@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import ProductCard from "./ProductCard";
 import NewProduct from "./NewProduct";
 import { useSelector } from "react-redux";

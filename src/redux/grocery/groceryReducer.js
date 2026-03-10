@@ -1,4 +1,4 @@
-import {UPDATE_ROUTE, ROUTE_GROCERY, ADD_PRODUCT} from "./actionTypes";
+import {UPDATE_ROUTE, ROUTE_GROCERY, ADD_PRODUCT, ADD_TO_CART} from "./actionTypes";
 const initialState = {
   form: {
     item_name: "",
@@ -9,6 +9,7 @@ const initialState = {
   },
   products: [], // To store all products in the cart
   nextId: 1, // Incremental ID for products
+  cart: [], // To store products added to the cart
   route: ROUTE_GROCERY
 };
 
@@ -20,11 +21,57 @@ const groceryReducer = (state = initialState, action) => {
             route: action.payload
         };
     case ADD_PRODUCT:
+        const existingProduct = state.products.find(
+            (product) =>
+                product.category === action.payload.category &&
+                product.item_name === action.payload.item_name
+        );
+
         return {
             ...state,
-            products: [...state.products, { ...action.payload, id: state.nextId }],
-            nextId: state.nextId + 1
-        }
+            products: existingProduct
+                ? state.products.map((product) =>
+                    product.category === action.payload.category &&
+                    product.item_name === action.payload.item_name
+                        ? {
+                            ...product,
+                            price: action.payload.price,
+                            quantity: product.quantity + action.payload.quantity
+                        }
+                        : product
+                )
+                : [
+                    ...state.products,
+                    { ...action.payload, id: state.nextId }
+                ],
+
+            nextId: existingProduct ? state.nextId : state.nextId + 1
+        };
+    case ADD_TO_CART:
+        const existingItem = state.cart.find(
+            (item) =>
+                item.name === action.payload.name &&
+                item.category === action.payload.category
+        );
+
+        return {
+            ...state,
+            cart: existingItem
+                ? state.cart.map((item) =>
+                    item.item_name === action.payload.item_name &&
+                    item.category === action.payload.category
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                )
+                : [...state.cart, { ...action.payload, quantity: 1 }],
+
+            products: state.products.map((product) =>
+                product.item_name === action.payload.item_name &&
+                product.category === action.payload.category
+                    ? { ...product, quantity: product.quantity - 1 }
+                    : product
+            )
+        };
     default:
       return state;
   }
