@@ -1,4 +1,4 @@
-import {UPDATE_ROUTE, ROUTE_GROCERY} from "./actionTypes";
+import {UPDATE_ROUTE, ROUTE_GROCERY, ADD_PRODUCT} from "./actionTypes";
 const initialState = {
   form: {
     item_name: "",
@@ -17,6 +17,12 @@ const groceryReducer = (state = initialState, action) => {
             ...state,
             route: action.payload
         };
+    case ADD_PRODUCT:
+        return {
+            ...state,
+            products: [...state.products, { ...action.payload, id: state.nextId }],
+            nextId: state.nextId + 1
+        }
     default:
       return state;
   }

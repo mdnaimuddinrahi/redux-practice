@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { ROUTE_GROCERY, ROUTE_CHECKOUT, UPDATE_ROUTE } from "../../redux/grocery/actionTypes";
+import { ROUTE_GROCERY, ROUTE_CHECKOUT } from "../../redux/grocery/actionTypes";
 import {updateRoute} from "../../redux/grocery/actionCreators"
 
 const Navbar = () => {
