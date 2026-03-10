@@ -1,8 +1,7 @@
 // import './App.css'
 import { Provider } from 'react-redux';
 import store from './redux/store';
-// import TodoLists from './components/TodoLists/TodoLists';
-import Grocery from './components/Grocery/Grocery';
+import Grocery from './components/GroceryApp/Grocery';
 
 function App() {
 
