@@ -1,13 +1,12 @@
 // import './App.css'
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import Grocery from './components/GroceryApp/Grocery';
+import ShoppingCart from './components/GroceryApp/ShoppingCart';
 
 function App() {
-
   return (
     <Provider store={store}>
-      <Grocery />
+        <ShoppingCart />
     </Provider>
   )
 }

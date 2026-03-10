@@ -1,4 +1,13 @@
-function Navbar() {
+import { useDispatch } from "react-redux";
+import { ROUTE_GROCERY, ROUTE_CHECKOUT, UPDATE_ROUTE } from "../../redux/grocery/actionTypes";
+import {updateRoute} from "../../redux/grocery/actionCreators"
+
+const Navbar = () => {
+    const dispatch = useDispatch();
+    const handleRoute = (route) => {
+        dispatch(updateRoute(route));
+    }
+
     return (
     <nav className="bg-[#171C2A] py-4">
         <div className="navBar">
@@ -7,11 +16,13 @@ function Navbar() {
         </a>
 
         <div className="flex gap-4">
-            <a href="#home" className="navHome" id="home"> Home </a>
-            <a href="cart.html" className="navCart" id="cart">
+            <button className="navHome" id="home" onClick={() => handleRoute(ROUTE_GROCERY)}>
+                Home
+            </button>
+            <button className="navCart" id="cart" onClick={() => handleRoute(ROUTE_CHECKOUT)}>
             <i className="text-xl fa-sharp fa-solid fa-bag-shopping"></i>
                 <span id="totalCart">0</span>
-            </a>
+            </button>
         </div>
         </div>
     </nav>)
