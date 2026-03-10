@@ -2,8 +2,10 @@ import {UPDATE_ROUTE, ROUTE_GROCERY, ADD_PRODUCT} from "./actionTypes";
 const initialState = {
   form: {
     item_name: "",
-    quantity: "",
-    price: "",
+    category: "",
+    image_url: "",
+    price: 0,
+    quantity: 0
   },
   products: [], // To store all products in the cart
   nextId: 1, // Incremental ID for products
