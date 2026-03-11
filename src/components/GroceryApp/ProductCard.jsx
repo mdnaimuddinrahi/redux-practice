@@ -21,7 +21,7 @@ const ProductCard = ({product}) => {
                 <p className="productPrice">BDT <span className="price">{product.price.toFixed(2)}</span></p>
                 <p className="productQuantity">QTY <span className="quantity">{product.quantity}</span></p>
             </div>
-            <button className="btnAddToCart" onClick={handleAddToCart}>
+            <button className="btnAddToCart" onClick={handleAddToCart} {...(product.quantity === 0 && { disabled: true })}>
                 Add To Cart
             </button>
         </div>

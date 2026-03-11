@@ -1,4 +1,21 @@
+import { addToCart, removeFromCart, decrementCartItem } from "../../redux/grocery/actionCreators";
+import { useDispatch, useSelector } from "react-redux";
+
 const CardItem = ({ item }) => {
+    const dispatch = useDispatch();
+    const product = useSelector((state) => state.grocery.products.find((p) => p.id === item.id));
+    const handleIncrement = () => {
+        dispatch(addToCart(item));
+    }
+    const handleDecrement = () => {
+        dispatch(decrementCartItem(item));
+    }
+
+    const handleRemove = () => {
+        dispatch(removeFromCart(item));
+    }
+    console.log("Product in CardItem:", product);
+
     return(
         <div className="cartCard">
             <div className="flex items-center col-span-6 space-x-6">
@@ -11,18 +28,19 @@ const CardItem = ({ item }) => {
             </div>
             <div className="flex items-center justify-center col-span-4 mt-4 space-x-8 md:mt-0">
                 <div className="flex items-center space-x-4">
-                    <button className="incrementQuantity">
+                    
+                    {product.quantity > 0 && <button className="incrementQuantity" onClick={handleIncrement}>
                         <i className="text-lg fa-solid fa-plus"></i>
-                    </button>
+                    </button>}
                     <span className="cartQuantity">{item.quantity}</span>
-                    <button className="decrementQuantity">
+                    <button className="decrementQuantity" onClick={handleDecrement}>
                         <i className="text-lg fa-solid fa-minus"></i>
                     </button>
                 </div>
                 <p className="text-lg font-bold">BDT <span className="calculatedPrice">{item.price * item.quantity}</span></p>
             </div>
             <div className="flex items-center justify-center col-span-2 mt-4 md:justify-end md:mt-0">
-                <button className="removeFromCart">
+                <button className="removeFromCart" onClick={handleRemove}>
                     <i className="text-lg text-red-400 fa-solid fa-trash"></i>
                 </button>
             </div>
