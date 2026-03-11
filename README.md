@@ -7,10 +7,13 @@ I am currently practicing state management and building small applications using
 ## Branches
 
 * **flight-booking** – A simple flight booking application to practice Redux state management.
-  Branch: https://github.com/your-username/your-repo/tree/flight-booking
+  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/flight-booking
 
 * **to-do-app** – A basic todo application to practice Redux actions, reducers, and store.
-  Branch: https://github.com/your-username/your-repo/tree/to-do-app
+  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/to-do-app
+
+* **product-grocery-app** – A basic grocery shop application to practice Redux actions, reducers, and store.
+  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/product-grocery-app
 
 ## Purpose
 
