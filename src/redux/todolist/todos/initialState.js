@@ -1,14 +1,3 @@
-const initialState  = [{
-    id: 0,
-    text: "Learn React",
-    completed: true,
-    color: "yellow"
-},
-{
-    id: 1,
-    text: "Learn Redux",
-    completed: false,
-    color: "green"
-}]
+const initialState  = []
 
 export default initialState

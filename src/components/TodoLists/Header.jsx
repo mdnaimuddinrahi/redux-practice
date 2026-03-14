@@ -1,6 +1,7 @@
 import { useState } from "react";
-import {added, allCompleted, clearCompleted} from "../../redux/todolist/todos/actions";
+import {allCompletedTodo, clearCompletedTodo} from "../../thunk/updateTodo";
 import { useDispatch } from "react-redux";
+import addTodo from "../../thunk/addTodo"
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -12,16 +13,16 @@ const Header = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(input.trim() === "") return;
-        dispatch(added(input));
+        dispatch(addTodo(input));
         setInput("");
     }
 
     const completeAll = () => {
-        dispatch(allCompleted());
+        dispatch(allCompletedTodo());
     }
 
     const clearAll = () => {
-        dispatch(clearCompleted());
+        dispatch(clearCompletedTodo());
     }
 
     return(

@@ -1,18 +1,19 @@
 import { useDispatch } from 'react-redux';
-import {toggled, colorSelected, deleted} from '../../redux/todolist/todos/actions'
+// import {toggled, colorSelected, deleted} from '../../redux/todolist/todos/actions'
+import {toggledTodo, colorSelectedTodo, deleteTodo} from '../../thunk/updateTodo'
 
 const Todo = ({todo, text}) => {
     const { id, completed, color } = todo;
     const dispatch = useDispatch();
 
-    const handleStatusChange = (id) => {
-        dispatch(toggled(id));
+    const handleStatusChange = (id, completed) => {
+        dispatch(toggledTodo(id, completed));
     }
     const handleColorChange = (id, color) => {
-        dispatch(colorSelected(id, color));
+        dispatch(colorSelectedTodo(id, color));
     }
     const handleDelete = (id) => {
-        dispatch(deleted(id));
+        dispatch(deleteTodo(id));
     }
     return (      
         <div
@@ -21,15 +22,15 @@ const Todo = ({todo, text}) => {
         >
             <div
                 className={`rounded-full bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 
-                    ${completed ? "border-green-500 focus-within:border-green-500" : ""}`}
+                    ${completed == 1 ? "border-green-500 focus-within:border-green-500" : ""}`}
             >
                 <input
                     type="checkbox"
-                    checked={completed}
-                    onChange={() => handleStatusChange(id)}
+                    checked={completed ==  1}
+                    onChange={() => handleStatusChange(id, completed)}
                     className="opacity-0 absolute rounded-full"
                 />
-                {completed && (
+                {completed == 1 && (
                     <svg
                         className=" fill-current w-3 h-3 text-green-500 pointer-events-none"
                         viewBox="0 0 20 20"

@@ -1,10 +1,10 @@
-import { ADDED, CLEARCOMPLETED, COLORSELECTED, DELETED, TOGGLED, ALLCOMPLETED } from "./actionTypes"
+import { ADDED, CLEARCOMPLETED, COLORSELECTED, DELETED, TOGGLED, ALLCOMPLETED, LOADED } from "./actionTypes"
 
 
-export const added = (text) => {
+export const added = (todo) => {
     return {
         type: ADDED,
-        payload: text
+        payload: todo
     }
 }
 
@@ -38,5 +38,12 @@ export const allCompleted = () => {
 export const clearCompleted = () => {
     return {
         type: CLEARCOMPLETED
+    }
+}
+
+export const loaded = (todos) => {
+    return {
+        type: LOADED,
+        payload: todos
     }
 }
