@@ -1,5 +1,10 @@
-import { applyMiddleware } from '@reduxjs/toolkit';
+/** 
+    * this proceedure work for build thunk feature without using RTK
+    * RTK(Redux tool kit)
+    * thunk implementation full scenario.
+**/
 import fetch from 'node-fetch';
+import { createStore, applyMiddleware } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 
 // state declaration
