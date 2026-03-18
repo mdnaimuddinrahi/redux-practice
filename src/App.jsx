@@ -1,15 +1,17 @@
 // import './App.css'
 import { Provider } from 'react-redux';
-// import store from '../src/app/store'
-// import TodoLists from './components/TodoLists/TodoLists';
+import Video from './pages/Video';
+// import Home from './pages/Home';
+
 
 
 function App() {
 
   return (
-    <Provider store={store}>
-      <TodoLists/>
-    </Provider>
+    // <Provider>
+      // <Home/>
+      <Video/>
+    // </Provider>
   )
 }
 
