@@ -6,7 +6,7 @@ export default function UnLike() {
         <div className="shrink-0">
             <img
                 className="w-5 block"
-                src="./assets/unlike.svg"
+                src="/assets/unlike.svg"
                 alt="Unlike"
             />
         </div>

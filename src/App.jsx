@@ -1,16 +1,13 @@
 // import './App.css'
 import { Provider } from 'react-redux';
-import Video from './pages/Video';
-// import Home from './pages/Home';
-
+import LearnVideo from './layout/LearnVideo';
 
 
 function App() {
 
   return (
     // <Provider>
-      // <Home/>
-      <Video/>
+    <LearnVideo/>
     // </Provider>
   )
 }

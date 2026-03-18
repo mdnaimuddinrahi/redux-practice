@@ -6,7 +6,7 @@ export default function Like() {
         <div className="shrink-0">
             <img
                 className="w-5 block"
-                src="./assets/like.svg"
+                src="/assets/like.svg"
                 alt="Like"
             />
         </div>

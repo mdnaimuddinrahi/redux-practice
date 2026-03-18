@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function RelatedVideoListItem() {
   return (
@@ -6,13 +7,13 @@ export default function RelatedVideoListItem() {
         <div
             className="relative w-[168px] h-[94px] flex-none duration-300 hover:scale-[1.03]"
         >
-            <a href="video.html">
+            <Link to="/">
                 <img
                     src="https://i3.ytimg.com/vi/6O4s7v28nlw/maxresdefault.jpg"
                     className="object-cover"
                     alt="Some video title"
                 />
-            </a>
+            </Link>
             <p
                 className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py"
             >
