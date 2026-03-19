@@ -26,7 +26,7 @@ export default function Tags() {
         }
     
         if(!isError && !isLoading && tags?.length === 0) {
-            content = <ErrorMsg text={'No tags found.'}/>
+            content = ''
         }
     
         if(!isError && !isLoading && tags?.length > 0) {

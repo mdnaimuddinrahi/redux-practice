@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function UnLike() {
+export default function UnLike({totalUnlike}) {
   return (
     <div className="flex gap-1">
         <div className="shrink-0">
@@ -13,7 +13,7 @@ export default function UnLike() {
         <div
             className="text-sm leading-[1.7142857] text-slate-600"
         >
-            100K
+            {totalUnlike}
         </div>
     </div>
   )

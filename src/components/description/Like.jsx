@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Like() {
+export default function Like({totalLike}) {
   return (
     <div className="flex gap-1">
         <div className="shrink-0">
@@ -13,7 +13,7 @@ export default function Like() {
         <div
             className="text-sm leading-[1.7142857] text-slate-600"
         >
-            100K
+            {totalLike}
         </div>
     </div>
   )
