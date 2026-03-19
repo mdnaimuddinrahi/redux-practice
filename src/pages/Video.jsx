@@ -41,7 +41,7 @@ export default function Video() {
                   <Player url={video.video_url} title={video.title}/>
                   <VideoDescription video={video}/>
               </div>
-              <RelatedVideoList/>
+              <RelatedVideoList id={video.id} tags={video.tags}/>
             </div> 
           )
       }

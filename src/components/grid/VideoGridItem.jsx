@@ -52,19 +52,18 @@ export default function VideoGridItem({video}) {
                     </Link>
 
                     <div clas="flex flex-col">
-                        <a href="video.html">
+                        <Link to={`/videos/${video.id}`}>
                             <p
                                 className="text-slate-900 text-sm font-semibold"
                             >
                                 {video.title}
                             </p>
-                        </a>
-                        <a
+                        </Link>
+                        <Link to={`/videos/${video.id}`}
                             className="text-gray-400 text-xs mt-2 hover:text-gray-600"
-                            href="#"
                         >
                             {video.author}
-                        </a>
+                        </Link>
                         <p className="text-gray-400 text-xs mt-1">
                             {video.views} views . {video.published_at}
                         </p>
