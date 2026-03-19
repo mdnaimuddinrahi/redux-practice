@@ -15,6 +15,10 @@ I am currently practicing state management and building small applications using
 * **product-grocery-app** – A basic grocery shop application to practice Redux actions, reducers, and store.
   Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/product-grocery-app
 
+
+* **vedio-web-app** – A basic vedio learning management tool.
+  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/vedio-web-app
+
 ## Purpose
 
 I created these projects to learn and practice how Redux works in real applications.
