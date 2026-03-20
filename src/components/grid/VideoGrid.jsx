@@ -8,10 +8,11 @@ import ErrorMsg from '../ui/ErrorMsg'
 export default function VideoGrid() {
     const dispatch = useDispatch();
     const {videos, isLoading, isError, error} = useSelector((state) => state.videos)
+    const {tags, search} = useSelector(state => state.filters)
 
     useEffect(() => {
-        dispatch(fetchVideos())
-    }, [dispatch])
+        dispatch(fetchVideos({search, tags}))
+    }, [dispatch, tags, search])
     
 
     // decide what to render
