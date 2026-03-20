@@ -11,7 +11,7 @@ export default function Navbar() {
                 <Link to={"/"}>
                     <img
                         className="h-10"
-                        src="./assets/lws.svg"
+                        src="./assets/logo.svg"
                         alt="PC Builder Bangladesh"
                     />
                 </Link>
