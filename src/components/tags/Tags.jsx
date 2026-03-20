@@ -8,7 +8,6 @@ import ErrorMsg from '../ui/ErrorMsg';
 export default function Tags() {
     const dispatch = useDispatch();
     const {tags, isError, isLoading, error} = useSelector((state) => state.tags)
-    console.log('tags :>> ', tags);
 
     useEffect(() => {
         dispatch(fetchTags())
