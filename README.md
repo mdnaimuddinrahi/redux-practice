@@ -53,7 +53,7 @@ A modern Video Streaming Web Application built with **React** and **Redux** on t
 ```bash
 git clone https://github.com/mdnaimuddinrahi/video-web-app.git
 cd video-web-app
-
+```
 
 # 📁 Project Structure
 
