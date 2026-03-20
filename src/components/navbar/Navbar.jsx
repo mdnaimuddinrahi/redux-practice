@@ -1,30 +1,14 @@
-import React from 'react'
-import SearchBar from './SearchBar'
 
 export default function Navbar() {
   return (
-    <nav className="bg-slate-100 shadow-md">
-            <div
-                className="max-w-7xl mx-auto px-5 lg:px-0 flex justify-between py-3"
-            >
-                <a href="/">
-                    <img
-                        className="h-10"
-                        src="./assets/lws.svg"
-                        alt="PC Builder Bangladesh"
-                    />
+    <nav className="py-4 border-b">
+        <div className="navbar-container">
+            <div className="logo">
+                <a href="index.html">
+                <img src="/images/LWSBlog.svg" alt="search" />
                 </a>
-                <div
-                    className="border border-slate-200 flex items-center bg-white h-10 px-5 rounded-lg text-sm ring-emerald-200"
-                >
-                    <SearchBar/>
-                    <img
-                        className="inline h-4 cursor-pointer"
-                        src="./assets/search.svg"
-                        alt="Search"
-                    />
-                </div>
             </div>
-        </nav>
+        </div>
+    </nav>
   )
 }

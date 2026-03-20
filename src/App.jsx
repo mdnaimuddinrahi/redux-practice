@@ -1,6 +1,7 @@
 // import './App.css'
-import { Provider } from 'react-redux';
-import Video from './pages/Video';
+// import { Provider } from 'react-redux';
+// import { store } from './app/store';
+import Bloggie from './layout/Bloggie';
 // import Home from './pages/Home';
 
 
@@ -8,9 +9,9 @@ import Video from './pages/Video';
 function App() {
 
   return (
-    // <Provider>
-      // <Home/>
-      <Video/>
+    
+    // <Provider store={store}>
+      <Bloggie/>
     // </Provider>
   )
 }

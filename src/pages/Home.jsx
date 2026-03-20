@@ -1,18 +1,14 @@
-import React from 'react'
-import Navbar from '../components/navbar/Navbar'
-import Tags from '../components/tags/Tags'
-import VideoGrid from '../components/grid/VideoGrid'
-import Footer from '../components/Footer'
-import Pagination from '../components/ui/Pagination'
+import BlogGrid from "../components/grid/BlogGrid";
+import Sidebar from "../sidebar/Sidebar"
 
 export default function Home() {
   return (
-    <div>
-        <Navbar/>
-        <Tags/>
-        <VideoGrid/>
-        <Pagination/>
-        <Footer/>
-    </div>
+    <section className="wrapper">
+      <Sidebar/>
+      <main className="post-container" id="lws-postContainer">
+        <BlogGrid/>
+        <BlogGrid/>
+      </main>
+    </section>
   )
 }
