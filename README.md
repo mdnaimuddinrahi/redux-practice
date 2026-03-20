@@ -1,235 +1,55 @@
-# Redux Practice Projects
+# 🎬 Video Streaming Web Application
 
-This repository contains my practice projects while learning **Redux** with **React**.
-
-I am currently practicing state management and building small applications using Redux.
-
-## Branches
-
-* **flight-booking** – A simple flight booking application to practice Redux state management.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/flight-booking
-
-* **to-do-app** – A basic todo application to practice Redux actions, reducers, and store.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/to-do-app
-
-* **product-grocery-app** – A basic grocery shop application to practice Redux actions, reducers, and store.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/product-grocery-app
-
-## Purpose
-
-I created these projects to learn and practice how Redux works in real applications.
-
-# Scalable Redux Toolkit Architecture
-
-A clean and scalable Redux Toolkit architecture designed for large React applications.
-This project demonstrates how to organize Redux logic using a **feature-based structure**, centralized API services, selectors, and async actions.
+[![React](https://img.shields.io/badge/React-18.2.0-blue?logo=react)](https://reactjs.org/) 
+[![Redux](https://img.shields.io/badge/Redux-Toolkit-purple?logo=redux)](https://redux.js.org/)
+[![Laravel](https://img.shields.io/badge/Laravel-10-red?logo=laravel)](https://laravel.com/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
-# 🚀 Overview
+## 📄 Overview
 
-This architecture follows modern best practices recommended by the Redux team.
-It separates concerns properly so applications remain **maintainable, scalable, and easy to understand**.
-
-Key ideas used in this structure:
-
-* Feature-based folder organization
-* Redux Toolkit slices
-* Centralized API services
-* Async logic with `createAsyncThunk`
-* Reusable selectors
-* Clean import patterns
+A modern Video Streaming Web Application built with **React** and **Redux** on the frontend, and **Laravel** as the backend API. Users can browse, search, filter, and view video details efficiently.
 
 ---
 
-# 📁 Project Structure
+## 🚀 Features
 
-```
-src
-│
-├── app
-│   ├── store.js
-│   ├── hooks.js
-│   └── rootReducer.js
-│
-├── features
-│   ├── cart
-│   │   ├── cartSlice.js
-│   │   ├── cartSelectors.js
-│   │   ├── cartThunks.js
-│   │   └── index.js
-│   │
-│   ├── products
-│   │   ├── productSlice.js
-│   │   ├── productSelectors.js
-│   │   ├── productAPI.js
-│   │   └── index.js
-│
-├── services
-│   └── api.js
-│
-├── components
-│   ├── Navbar.jsx
-│   └── ProductCard.jsx
-│
-├── pages
-│   ├── Home.jsx
-│   └── CartPage.jsx
-│
-├── utils
-│   └── helpers.js
-│
-├── App.jsx
-└── main.jsx
-```
+### ✅ Core Features
+- **Video Listing** – Browse all available videos with thumbnails, titles, and tags  
+- **Pagination** – Navigate through video pages seamlessly  
+- **Search by Title** – Find videos using keywords in the title  
+- **Tag-Based Filtering** – Filter videos using single or multiple tags  
+- **Video Details** – Full view of a video including description, tags, and player  
+- **Related Videos** – Display videos related by shared tags  
+
+### 🛠️ Tech Stack
+- **Frontend:** React.js, Redux Toolkit, Axios  
+- **Backend API:** Laravel 10  
+- **State Management:** Redux slices and async actions with Redux Thunk  
+- **Styling:** TailwindCSS / CSS modules (adjust as per your project)  
 
 ---
 
-# 🧠 Architecture Explanation
+## 🏗️ Architecture
 
-## 1. App Layer
+**Data Flow:**
+1. User triggers an action (search, filter, pagination)  
+2. Action is dispatched to Redux store  
+3. Async API call to Laravel backend fetches video data  
+4. Reducer updates the state  
+5. UI re-renders with updated data  
 
-The **app folder** contains the global Redux configuration.
-
-* `store.js` → Configures Redux store
-* `rootReducer.js` → Combines all reducers
-* `hooks.js` → Custom Redux hooks
-
----
-
-## 2. Features Layer
-
-Each feature manages its own Redux logic.
-
-Example:
-
-```
-features/cart
-```
-
-Contains:
-
-* `cartSlice.js` → Redux slice
-* `cartSelectors.js` → Selectors
-* `cartThunks.js` → Async logic
-* `index.js` → Clean exports
-
-This keeps each feature **independent and scalable**.
+**State Management:**
+- Global Redux store  
+- Separate slices for videos, filters, and pagination  
+- Async operations handled via `createAsyncThunk`  
 
 ---
 
-## 3. Services Layer
+## ⚙️ Installation & Setup
 
-The **services folder** contains centralized API configurations.
-
-Example:
-
-```
-services/api.js
-```
-
-This allows all API calls to use the same configuration.
-
-Benefits:
-
-* Easier API management
-* Cleaner async code
-* Reusable request logic
-
----
-
-## 4. Components Layer
-
-Reusable UI components.
-
-Examples:
-
-* Navbar
-* ProductCard
-* Buttons
-* Layout elements
-
-These components should remain **UI focused** and avoid business logic.
-
----
-
-## 5. Pages Layer
-
-Pages represent application screens.
-
-Examples:
-
-* Home
-* Cart page
-* Product list page
-
-Pages combine components and connect them to Redux.
-
----
-
-# ⚙️ Store Configuration Example
-
-```javascript
-import { configureStore } from '@reduxjs/toolkit'
-import rootReducer from './rootReducer'
-
-export const store = configureStore({
-  reducer: rootReducer,
-  devTools: true
-})
-```
-
----
-
-# 🔄 Async Actions Example
-
-Redux Toolkit supports async logic using `createAsyncThunk`.
-
-Example:
-
-```javascript
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    const response = await api.get('/products')
-    return response.data
-  }
-)
-```
-
----
-
-# 🎯 Benefits of This Architecture
-
-* Scales well for large applications
-* Keeps Redux logic organized
-* Improves maintainability
-* Reduces code duplication
-* Makes onboarding easier for teams
-
----
-
-# 📚 Technologies Used
-
-* React
-* Redux Toolkit
-* React Redux
-* Axios (for API requests)
-
----
-
-# 💡 Best Practices
-
-* Keep components focused on UI
-* Place business logic in slices or thunks
-* Use selectors to access state
-* Keep features independent
-* Centralize API logic
-
----
-
-# 📌 Conclusion
-
-This architecture provides a **clean and scalable foundation** for building modern React applications using Redux Toolkit.
-It follows best practices used by experienced developers and helps maintain a well-structured codebase as the application grows.
-
+### 1. Clone the repository
+```bash
+git clone https://github.com/mdnaimuddinrahi/video-web-app.git
+cd video-web-app
