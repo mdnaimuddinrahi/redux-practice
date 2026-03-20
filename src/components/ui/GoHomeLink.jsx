@@ -1,3 +1,4 @@
+import { Home } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 
 export default function GoHomeLink() {
@@ -6,8 +7,8 @@ export default function GoHomeLink() {
 
   return (
     <div className="container mt-8">
-      <Link to="/" className="inline-block text-gray-600 home-btn">
-        Go Home
+      <Link to="/" className="inline-flex items-center text-gray-600 home-btn">
+        <Home className="mr-2" /> Go Home
       </Link>
     </div>
   )
