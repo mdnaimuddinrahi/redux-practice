@@ -53,3 +53,84 @@ A modern Video Streaming Web Application built with **React** and **Redux** on t
 ```bash
 git clone https://github.com/mdnaimuddinrahi/video-web-app.git
 cd video-web-app
+
+
+# 📁 Project Structure
+
+```
+src
+│
+├── app
+│   └── store.js
+│
+├── components
+│   ├── description
+│   │   ├── Like.jsx
+│   │   ├── Player.jsx
+│   │   ├── UnLike.jsx
+│   │   └── VideoDescription.jsx
+│   │
+│   ├── grid
+│   │   ├── VideoGrid.jsx
+│   │   └── VideoGridItem.jsx
+│   │
+│   ├── list
+│   │   ├── RelatedVideoList.jsx
+│   │   └── RelatedVideoListItem.jsx
+│   │
+│   ├── navbar
+│   │   ├── Navbar.jsx
+│   │   └── SearchBar.jsx
+│   │
+│   ├── tags
+│   │   ├── Tag.jsx
+│   │   └── Tags.jsx
+│   │
+│   ├── ui
+│   │   ├── ErroMsg.jsx
+│   │   ├── Loading.jsx
+│   │   └── Pagination.jsx
+│   │
+│   └── Footer.jsx
+│
+├── features
+│   ├── filter
+│   │   └── filterSlice.js
+│   │
+│   ├── relatedVideo
+│   │   ├── relatedVideosAPI.js
+│   │   └── relatedVideosSlice.js
+│   │
+│   ├── tags
+│   │   ├── tagsAPI.js
+│   │   └── tagsSlice.js
+│   │ 
+│   ├── video
+│   │   ├── videoAPI.js
+│   │   └── videoSlice.js
+│   │ 
+│   └── videos
+│       ├── videosAPI.js
+│       └── videosSlice.js
+│
+│
+├── layout
+│   └── LearnVideo.jsx
+│
+├── pages
+│   ├── Home.jsx
+│   └── Video.jsx
+│
+├── utils
+│   └── axios.js
+│
+├── App.css
+│
+├── App.jsx
+│
+├── index.css
+│
+├── main.jsx
+│
+└── rootReducers.jsx
+```
