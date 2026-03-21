@@ -12,17 +12,16 @@ export default function Details() {
   const dispatch = useDispatch();
   const {blogId} = useParams();
 
-  console.log('blogId :>> ', blogId);
-
   useEffect(() => {
     dispatch(fetchBlog(blogId))
-  }, [dispatch])
+  }, [dispatch, blogId])
+  console.log('blog :>> ', blog);
 
    // decide what to render
     let content = '';
     
     if(isLoading) {
-        content = <Loading/>;
+        content = (<section className="post-page-container"><Loading/></section>);
     }
 
     if(!isLoading && isError) {
@@ -30,7 +29,8 @@ export default function Details() {
     }
 
     if(!isError && !isLoading && !blog?.id ) {
-        content = <ErrorMsg text={'No video found.'}/>
+        content = (<section className="post-page-container"><ErrorMsg text={'No video found.'}/></section>);
+
     }
   
     if(!isError && !isLoading && blog?.id ) {
