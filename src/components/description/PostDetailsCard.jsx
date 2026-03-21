@@ -1,11 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMsg from "../ui/ErrorMsg";
-import Loading from "../ui/Loading";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { fetchBlog } from "../../features/blog/blogSlice";
 
-export default function PostDetailsCard() {
+
+export default function PostDetailsCard({blog}) {
    // "data": {
   //       "id": 1,
   //       "title": "MERN is the new trend for web development!",
@@ -21,36 +16,13 @@ export default function PostDetailsCard() {
   //       "created_at": "2026-03-20",
   //       "updated_at": "2026-03-20"
   //   }
-  const {blog, isLoading, isError, error} = useSelector((state) => state.blog);
-  const dispatch = useDispatch();
-  const {blogId} = useParams();
+  
 
-  console.log('blogId :>> ', blogId);
+  const tags = blog.tags.map((tag, index) => (
+      <span key={index}>#{tag}{index !== blog.tags.length - 1 && ', '}</span>
+    ))
 
-  useEffect(() => {
-    dispatch(fetchBlog(blogId))
-  }, [dispatch])
-
-   // decide what to render
-    let content = '';
-    
-    if(isLoading) {
-        content = <Loading/>;
-    }
-
-    if(!isLoading && isError) {
-        content = <ErrorMsg text={error}/>
-    }
-
-    if(!isError && !isLoading && !blog?.id ) {
-        content = <ErrorMsg text={'No video found.'}/>
-    }
-
-    if(!isError && !isLoading && blog?.id ) {
-      const tags = blog.tags.map((tag, index) => (
-          <span key={index}>#{tag}{index !== blog.tags.length - 1 && ', '}</span>
-        ))
-        content = (<main className="post">
+  return (<main className="post">
                       <img src={blog.image} alt="githum" className="w-full rounded-md" id="lws-megaThumb" />
                       <div>
                         <h1 className="mt-6 text-2xl post-title" id="lws-singleTitle">
@@ -69,7 +41,5 @@ export default function PostDetailsCard() {
                           <p>{blog.description}</p>
                         </div>
                       </div>
-                    </main>)
-                    }
-  return content;
+                    </main>);
 }

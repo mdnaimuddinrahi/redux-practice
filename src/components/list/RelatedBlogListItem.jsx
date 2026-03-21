@@ -1,20 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function RelatedBlogListItem() {
+export default function RelatedBlogListItem({blog}) {
+
+  const tags = blog.tags.map((tag, index) => (
+      <span key={index}>#{tag}{index !== blog.tags.length - 1 && ', '}</span>
+    ))
   return (
     <div className="card">
-      <Link to='/blogs/34'>
-        <img src="/images/git.webp" className="card-image" alt="" />
+      <Link to={`/blogs/${blog.id}`}>
+        <img src={blog.image} className="card-image" alt="" />
       </Link>
       <div className="p-4">
-       <Link to='/blogs/34' className="text-lg post-title lws-RelatedPostTitle">
-            Top Github Alternatives
+       <Link to={`/blogs/${blog.id}`} className="text-lg post-title lws-RelatedPostTitle">
+            {blog.title}
         </Link>
-        <div className="mb-0 tags">
-            <span>#python,</span> <span>#tech,</span> <span>#git</span>
-        </div>
-        <p>2010-03-27</p>
+        <div className="mb-0 tags">{tags}</div>
+        <p>{blog.created_at}</p>
       </div>
     </div>
   )
