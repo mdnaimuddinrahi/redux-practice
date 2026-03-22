@@ -10,11 +10,11 @@ import { fetchBlogs } from "../features/blogs/blogsSlice"
 export default function Home() {
   const dispatch = useDispatch();
   const {blogs, isLoading, isError, error} = useSelector((state) => state.blogs)
+  const {is_saved, sort_by} = useSelector((state) => state.filters)
 
-  console.log('blogs :>> ', blogs);
   useEffect(() => {
-        dispatch(fetchBlogs())
-    }, [dispatch])
+        dispatch(fetchBlogs({is_saved, sort_by}))
+    }, [dispatch, is_saved, sort_by])
 
      // decide what to render
     let content = '';

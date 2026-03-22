@@ -34,7 +34,7 @@ export default function PostDetailsCard({blog}) {
                             <i className="fa-regular fa-thumbs-up"></i> {blog.likes}
                           </button>
                           <button className="active save-btn" id="lws-singleSavedBtn">
-                            <i className="fa-regular fa-bookmark"></i> {blog.is_saved === 1 ? 'Not Save' : 'Saved'}
+                            <i className="fa-regular fa-bookmark"></i> {blog.is_saved === 1 ? 'Save' : 'Not Saved'}
                           </button>
                         </div>
                         <div className="mt-6">

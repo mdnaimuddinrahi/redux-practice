@@ -11,8 +11,8 @@ const initialState = {
 // async thunk
 export const fetchBlogs = createAsyncThunk(
     'blogs/fetchBlogs', // need to make a name.
-    async () => {
-        const blogs = await getBlogs();
+    async ({is_saved, sort_by}) => {
+        const blogs = await getBlogs({is_saved, sort_by});
         return blogs;
     }
 )
@@ -28,7 +28,8 @@ const blogSlice = createSlice({
         })
         .addCase(fetchBlogs.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.blogs = action.payload.data
+            state.blogs = action.payload
+            console.log('action.payload :>> ', action.payload);
         })
         .addCase(fetchBlogs.rejected, (state, action) => {
             state.isLoading = false;

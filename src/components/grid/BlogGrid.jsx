@@ -33,7 +33,7 @@ export default function BlogGrid({blog}) {
         <Link to={`/blogs/${blog.id}`} className="lws-postTitle"> {blog.title} </Link>
         <div className="lws-tags">{tags}</div>
         <div className="flex gap-2 mt-4">
-          <span className="lws-badge"> {blog.is_saved === 1 ? 'Not Save' : 'Saved'} </span>
+          <span className="lws-badge"> {blog.is_saved === 1 ? 'Saved' :'Not Save'} </span>
         </div>
        
       </div>
