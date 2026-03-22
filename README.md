@@ -1,50 +1,67 @@
-# Redux Practice Projects
+# 🎬 Video Streaming Web Application
 
-This repository contains my practice projects while learning **Redux** with **React**.
-
-I am currently practicing state management and building small applications using Redux.
-
-## Branches
-
-* **flight-booking** – A simple flight booking application to practice Redux state management.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/flight-booking
-
-* **to-do-app** – A basic todo application to practice Redux actions, reducers, and store.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/to-do-app
-
-* **product-grocery-app** – A basic grocery shop application to practice Redux actions, reducers, and store.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/product-grocery-app
-
-
-* **vedio-web-app** – A basic vedio learning management tool.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/vedio-web-app
-
-## Purpose
-
-I created these projects to learn and practice how Redux works in real applications.
-
-# Scalable Redux Toolkit Architecture
-
-A clean and scalable Redux Toolkit architecture designed for large React applications.
-This project demonstrates how to organize Redux logic using a **feature-based structure**, centralized API services, selectors, and async actions.
+[![React](https://img.shields.io/badge/React-18.2.0-blue?logo=react)](https://reactjs.org/) 
+[![Redux](https://img.shields.io/badge/Redux-Toolkit-purple?logo=redux)](https://redux.js.org/)
+[![Laravel](https://img.shields.io/badge/Laravel-10-red?logo=laravel)](https://laravel.com/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
-# 🚀 Overview
+## 📄 Overview
 
-This architecture follows modern best practices recommended by the Redux team.
-It separates concerns properly so applications remain **maintainable, scalable, and easy to understand**.
-
-Key ideas used in this structure:
-
-* Feature-based folder organization
-* Redux Toolkit slices
-* Centralized API services
-* Async logic with `createAsyncThunk`
-* Reusable selectors
-* Clean import patterns
+A modern Blog Web Application built with **React** and **Redux** on the frontend, and **Laravel** as the backend API. Users can browse, search, filter, and explore blog content efficiently. The application provides a seamless reading experience with features like tag-based filtering, related blog suggestions, and dynamic interactions such as liking and saving blogs.
 
 ---
+
+## 🚀 Features
+
+## ✅ Core Features
+
+- **Blog Listing** – Browse all available blogs with featured images, titles, and tags  
+- **Search by Title** – Find blogs using keywords in the title  
+- **Tag-Based Filtering** – Filter blogs using single or multiple tags  
+- **Blog Details** – Full view of a blog including description, tags, and full content  
+- **Related Blogs** – Display blogs related by shared tags  
+
+
+## 🚀 Additional Features
+
+- **Like System** – Users can like blogs and see the total number of likes updated dynamically  
+- **Save/Bookmark** – Mark blogs as saved or unsaved for quick access later  
+- **Sorting Options** – Sort blogs by newest or most liked  
+- **Dynamic UI Updates** – Instant UI updates for like and save actions without page reload (optimistic update)
+
+### 🛠️ Tech Stack
+- **Frontend:** React.js, Redux Toolkit, Axios  
+- **Backend API:** Laravel 10  
+- **State Management:** Redux slices and async actions with Redux Thunk  
+- **Styling:** TailwindCSS / CSS modules (adjust as per your project)  
+
+---
+
+## 🏗️ Architecture
+
+**Data Flow:**
+1. User triggers an action (search, filter, update)  
+2. Action is dispatched to Redux store  
+3. Async API call to Laravel backend fetches blog data  
+4. Reducer updates the state  
+5. UI re-renders with updated data  
+
+**State Management:**
+- Global Redux store  
+- Separate slices for blogs, filters, and update (likes and Is Saved)  
+- Async operations handled via `createAsyncThunk`  
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/mdnaimuddinrahi/blog-app.git
+cd blog-app
+```
 
 # 📁 Project Structure
 
@@ -52,188 +69,72 @@ Key ideas used in this structure:
 src
 │
 ├── app
-│   ├── store.js
-│   ├── hooks.js
-│   └── rootReducer.js
-│
-├── features
-│   ├── cart
-│   │   ├── cartSlice.js
-│   │   ├── cartSelectors.js
-│   │   ├── cartThunks.js
-│   │   └── index.js
-│   │
-│   ├── products
-│   │   ├── productSlice.js
-│   │   ├── productSelectors.js
-│   │   ├── productAPI.js
-│   │   └── index.js
-│
-├── services
-│   └── api.js
+│   └── store.js
 │
 ├── components
-│   ├── Navbar.jsx
-│   └── ProductCard.jsx
+│   ├── description
+│   │   └── PostDetailsCard.jsx
+│   │
+│   ├── grid
+│   │   └── BlogGrid.jsx
+│   │
+│   ├── list
+│   │   ├── RelatedBlogList.jsx
+│   │   └── RelatedBlogListItem.jsx
+│   │
+│   ├── navbar
+│   │   └── Navbar.jsx
+│   │
+│   ├── tags
+│   │   ├── Tag.jsx
+│   │   └── Tags.jsx
+│   │
+│   └── ui
+│       ├── ErroMsg.jsx
+│       ├── Loading.jsx
+│       └── GoHomeLink.jsx
+│
+├── features
+│   │
+│   ├── filter
+│   │   └── filterSlice.js
+│   │
+│   ├── relatedBlogs
+│   │   ├── relatedBlogsAPI.js
+│   │   └── relatedBlogsSlice.js
+│   │
+│   ├── blogs
+│   │   ├── blogsAPI.js
+│   │   └── blogsSlice.js
+│   │ 
+│   ├── blog
+│   │   ├── blogAPI.js
+│   │   └── blogSlice.js
+│   │ 
+│   └── updateBlog
+│       ├── updateBlogAPI.js
+│       └── updateBlogSlice.js
+│
+├── layout
+│   └── Bloggie.jsx
 │
 ├── pages
-│   ├── Home.jsx
-│   └── CartPage.jsx
+│   ├── Details.jsx
+│   └── Home.jsx
+│
+├── sidebar
+│   └── Sidebar.jsx
 │
 ├── utils
-│   └── helpers.js
+│   └── axios.js
+│
+├── App.css
 │
 ├── App.jsx
-└── main.jsx
+│
+├── index.css
+│
+├── main.jsx
+│
+└── rootReducers.jsx
 ```
-
----
-
-# 🧠 Architecture Explanation
-
-## 1. App Layer
-
-The **app folder** contains the global Redux configuration.
-
-* `store.js` → Configures Redux store
-* `rootReducer.js` → Combines all reducers
-* `hooks.js` → Custom Redux hooks
-
----
-
-## 2. Features Layer
-
-Each feature manages its own Redux logic.
-
-Example:
-
-```
-features/cart
-```
-
-Contains:
-
-* `cartSlice.js` → Redux slice
-* `cartSelectors.js` → Selectors
-* `cartThunks.js` → Async logic
-* `index.js` → Clean exports
-
-This keeps each feature **independent and scalable**.
-
----
-
-## 3. Services Layer
-
-The **services folder** contains centralized API configurations.
-
-Example:
-
-```
-services/api.js
-```
-
-This allows all API calls to use the same configuration.
-
-Benefits:
-
-* Easier API management
-* Cleaner async code
-* Reusable request logic
-
----
-
-## 4. Components Layer
-
-Reusable UI components.
-
-Examples:
-
-* Navbar
-* ProductCard
-* Buttons
-* Layout elements
-
-These components should remain **UI focused** and avoid business logic.
-
----
-
-## 5. Pages Layer
-
-Pages represent application screens.
-
-Examples:
-
-* Home
-* Cart page
-* Product list page
-
-Pages combine components and connect them to Redux.
-
----
-
-# ⚙️ Store Configuration Example
-
-```javascript
-import { configureStore } from '@reduxjs/toolkit'
-import rootReducer from './rootReducer'
-
-export const store = configureStore({
-  reducer: rootReducer,
-  devTools: true
-})
-```
-
----
-
-# 🔄 Async Actions Example
-
-Redux Toolkit supports async logic using `createAsyncThunk`.
-
-Example:
-
-```javascript
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    const response = await api.get('/products')
-    return response.data
-  }
-)
-```
-
----
-
-# 🎯 Benefits of This Architecture
-
-* Scales well for large applications
-* Keeps Redux logic organized
-* Improves maintainability
-* Reduces code duplication
-* Makes onboarding easier for teams
-
----
-
-# 📚 Technologies Used
-
-* React
-* Redux Toolkit
-* React Redux
-* Axios (for API requests)
-
----
-
-# 💡 Best Practices
-
-* Keep components focused on UI
-* Place business logic in slices or thunks
-* Use selectors to access state
-* Keep features independent
-* Centralize API logic
-
----
-
-# 📌 Conclusion
-
-This architecture provides a **clean and scalable foundation** for building modern React applications using Redux Toolkit.
-It follows best practices used by experienced developers and helps maintain a well-structured codebase as the application grows.
-

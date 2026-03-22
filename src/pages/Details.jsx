@@ -15,7 +15,6 @@ export default function Details() {
   useEffect(() => {
     dispatch(fetchBlog(blogId))
   }, [dispatch, blogId])
-  console.log('blog :>> ', blog);
 
    // decide what to render
     let content = '';

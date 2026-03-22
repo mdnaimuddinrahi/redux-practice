@@ -1,6 +1,9 @@
+import { useDispatch, useSelector } from "react-redux";
+import { updateBlog } from "../../features/updateBlog/updateBlogSlice";
+import { fetchBlog } from "../../features/blog/blogSlice";
 
 
-export default function PostDetailsCard({blog}) {
+export default function PostDetailsCard() {
    // "data": {
   //       "id": 1,
   //       "title": "MERN is the new trend for web development!",
@@ -16,7 +19,24 @@ export default function PostDetailsCard({blog}) {
   //       "created_at": "2026-03-20",
   //       "updated_at": "2026-03-20"
   //   }
-  
+  const { blog } = useSelector((state) => state.blog);
+  const dispatch = useDispatch()
+
+  const handleSetLike = () => {
+    dispatch(updateBlog({
+      id: blog.id,
+      data: { likes: blog.likes + 1 }
+    }));
+    dispatch(fetchBlog(blog.id));
+  };
+
+  const handleSetIsSaved = () => {
+    dispatch(updateBlog({
+      id: blog.id,
+      data: { is_saved: blog.is_saved === 1 ? 0 : 1 }
+    }));
+    dispatch(fetchBlog(blog.id));
+  };
 
   const tags = blog.tags.map((tag, index) => (
       <span key={index}>#{tag}{index !== blog.tags.length - 1 && ', '}</span>
@@ -30,10 +50,10 @@ export default function PostDetailsCard({blog}) {
                         </h1>
                         <div className="tags" id="lws-singleTags">{tags}</div>
                         <div className="btn-group">
-                          <button className="like-btn" id="lws-singleLinks">
+                          <button className="like-btn" id="lws-singleLinks" onClick={handleSetLike}>
                             <i className="fa-regular fa-thumbs-up"></i> {blog.likes}
                           </button>
-                          <button className="active save-btn" id="lws-singleSavedBtn">
+                          <button className="active save-btn" id="lws-singleSavedBtn" onClick={handleSetIsSaved}>
                             <i className="fa-regular fa-bookmark"></i> {blog.is_saved === 1 ? 'Save' : 'Not Saved'}
                           </button>
                         </div>
