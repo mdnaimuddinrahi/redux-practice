@@ -23,11 +23,15 @@ export default function Transaction({transaction}) {
     const handleDelete = (id) => {
         dispatch(removeTransaction(id))
     }
+    const formatNumber = (num) => {
+        return new Intl.NumberFormat('en-BD').format(num)
+    }
+
     return (
             <li className={`transaction ${transaction.type}`}>
                 <p>{transaction.name}</p>
                 <div className="right">
-                    <p>৳ {transaction.amount}</p>
+                    <p>৳ {formatNumber(transaction.amount)}</p>
                     <button className="link" onClick={handleEdit}>
                         <img
                             className="icon"
