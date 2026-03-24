@@ -36,8 +36,6 @@ export default function Form() {
             }))
             reset();
         }
-       
-        
     }
 
     const cancelEditMode = () => {
@@ -62,7 +60,7 @@ export default function Form() {
 
     return (
         <div className="form">
-            <h3>Add new transaction</h3>
+            <h3>{editMode ? 'Edit' : 'Add  new'} transaction</h3>
             <form onSubmit={handleCreate}>
                 <div className="form-group">
                     <label htmlFor="transaction_name">Name</label>
