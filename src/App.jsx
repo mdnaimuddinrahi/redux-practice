@@ -1,14 +1,19 @@
 // import './App.css'
-import { Provider } from 'react-redux';
+import Layout from './components/Layout';
+import Balance from './components/Balance';
+import Form from './components/Form';
+import Transactions from './components/Transactions/Transactions';
 
 
 
 function App() {
 
   return (
-    // <Provider>
-      // <Home/
-    // </Provider>
+    <Layout>
+        <Balance/>
+        <Form/>
+        <Transactions/>
+    </Layout>
   )
 }
 
