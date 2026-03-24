@@ -21,6 +21,10 @@ I am currently practicing state management and building small applications using
 * **blog-app** – A basic Blog management app.
   Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/blog-app
 
+
+* **blog-app** – A basic Expense Track app.
+  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/expense-tracker
+
 ## Purpose
 
 I created these projects to learn and practice how Redux works in real applications.
