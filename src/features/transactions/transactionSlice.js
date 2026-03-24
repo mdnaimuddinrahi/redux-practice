@@ -1,0 +1,113 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { addTransaction, editTransaction, getTransactions, deleteTransaction } from "./transactionAPI"
+
+const initialState = {
+    transactions: [],
+    isLoading: false,
+    isError: false,
+    error: ''
+}
+
+export const fetchTransactions = createAsyncThunk(
+    'transaction/fetchTransactions', 
+    async () => {
+        const transactions = await getTransactions();
+        return transactions;
+    }
+)
+
+export const createTransaction = createAsyncThunk(
+    'transaction/createTransaction', 
+    async(data) => {
+        const transaction = await addTransaction(data);
+        return transaction;
+    }
+)
+
+export const changeTransaction = createAsyncThunk(
+    'transaction/changeTransaction', 
+    async({id, data}) => {
+        const transaction = await editTransaction(id, data);
+        return transaction;
+    }
+)
+
+export const removeTransaction = createAsyncThunk(
+    'transaction/removeTransaction', 
+    async(id) => {
+        const transaction = await deleteTransaction(id);
+        return transaction;
+    }
+)
+
+// create slice
+const transactionSlice = createSlice({
+    name: "transaction",
+    initialState,
+    extraReducers: (builder) => {
+        builder.addCase(fetchTransactions.pending, (state) => {
+            state.isError = false;
+            state.isLoading = true;
+        })
+        builder.addCase(fetchTransactions.fulfilled, (state, action) => {
+            state.isError = false;
+            state.isLoading = false;
+            state.transactions = action.payload;
+        })
+        builder.addCase(fetchTransactions.rejected, (state, action) => {
+            state.isError = false;
+            state.isLoading = true;
+            state.transactions = [];
+            state.error = action.error?.message;
+        })
+        builder.addCase(createTransaction.pending, (state) => {
+            state.isError = false;
+            state.isLoading = true;
+        })
+        builder.addCase(createTransaction.fulfilled, (state, action) => {
+            state.isError = false;
+            state.isLoading = false;
+            state.transactions.push(action.payload);
+        })
+        builder.addCase(createTransaction.rejected, (state, action) => {
+            state.isError = false;
+            state.isLoading = true;
+            state.error = action.error?.message;
+        })
+        builder.addCase(changeTransaction.pending, (state) => {
+            state.isError = false;
+            state.isLoading = true;
+        })
+        builder.addCase(changeTransaction.fulfilled, (state, action) => {
+            state.isError = false;
+            state.isLoading = false;
+            const indexToUpdate = state.transactions.findIndex
+            (t => t.id === action.payload.id);
+
+            state.transactions[indexToUpdate] =action.payload;
+        })
+        builder.addCase(changeTransaction.rejected, (state, action) => {
+            state.isError = false;
+            state.isLoading = true;
+            state.error = action.error?.message;
+        })
+        builder.addCase(removeTransaction.pending, (state) => {
+            state.isError = false;
+            state.isLoading = true;
+        })
+        builder.addCase(removeTransaction.fulfilled, (state, action) => {
+            state.isError = false;
+            state.isLoading = false;
+            state.transactions = state.transactions.filter(
+                (t) => t.id !== action.payload
+            )
+        })
+        builder.addCase(removeTransaction.rejected, (state, action) => {
+            state.isError = false;
+            state.isLoading = true;
+            state.error = action.error?.message;
+        })
+    }
+})
+
+export default transactionSlice.reducer;
