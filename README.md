@@ -1,241 +1,132 @@
-# Redux Practice Projects
-
-This repository contains my practice projects while learning **Redux** with **React**.
-
-I am currently practicing state management and building small applications using Redux.
-
-## Branches
-
-* **flight-booking** – A simple flight booking application to practice Redux state management.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/flight-booking
-
-* **to-do-app** – A basic todo application to practice Redux actions, reducers, and store.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/to-do-app
-
-* **product-grocery-app** – A basic grocery shop application to practice Redux actions, reducers, and store.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/product-grocery-app
-
-* **vedio-web-app** – A basic vedio learning management tool.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/vedio-web-app
-
-* **blog-app** – A basic Blog management app.
-  Branch: https://github.com/mdnaimuddinrahi/redux-practice/tree/blog-app
-
-## Purpose
-
-I created these projects to learn and practice how Redux works in real applications.
-
-# Scalable Redux Toolkit Architecture
-
-A clean and scalable Redux Toolkit architecture designed for large React applications.
-This project demonstrates how to organize Redux logic using a **feature-based structure**, centralized API services, selectors, and async actions.
+# 📘 Software Requirements Specification (SRS)
+## Expense Tracker Application
 
 ---
 
-# 🚀 Overview
+## 📄 1. Introduction
 
-This architecture follows modern best practices recommended by the Redux team.
-It separates concerns properly so applications remain **maintainable, scalable, and easy to understand**.
+### 1.1 Purpose
+The purpose of this document is to describe the requirements of a simple **Expense Tracker Application** developed for learning and practicing **Redux Toolkit** with backend API integration using **Laravel**.
 
-Key ideas used in this structure:
+### 1.2 Scope
+This application allows users to:
+- Add transactions (income/expense)
+- Update existing transactions
+- Delete transactions
+- View total balance
 
-* Feature-based folder organization
-* Redux Toolkit slices
-* Centralized API services
-* Async logic with `createAsyncThunk`
-* Reusable selectors
-* Clean import patterns
+The system is designed as a learning project and focuses on state management and API integration rather than production-level features.
+
+### 1.3 Technologies Used
+- **Frontend:** React.js, Redux Toolkit  
+- **Backend:** Laravel (REST API)  
+- **Database:** MySQL  
 
 ---
 
-# 📁 Project Structure
+## 🎯 2. Overall Description
+
+### 2.1 Product Perspective
+This is a single-page application (SPA) that communicates with a Laravel backend API to perform CRUD operations on transactions.
+
+### 2.2 Product Functions
+- Create a new transaction
+- Update transaction details
+- Delete a transaction
+- Display all transactions
+- Calculate and display total balance
+
+### 2.3 User Characteristics
+- Basic users with no authentication required
+- Intended for developers learning Redux Toolkit
+
+### 2.4 Constraints
+- No authentication or authorization
+- Limited UI/UX features
+- No advanced filtering or reporting
+
+---
+
+## ⚙️ 3. Functional Requirements
+
+### 3.1 Add Transaction
+- User can add a transaction with:
+  - Name
+  - Type (Income / Expense)
+  - Amount
+- Data is sent to backend API and stored in database
+
+### 3.2 Update Transaction
+- User can edit an existing transaction
+- Updated data is sent to backend and reflected in UI
+
+### 3.3 Delete Transaction
+- User can remove a transaction
+- Deleted from backend and UI updates accordingly
+
+### 3.4 View Transactions
+- All transactions are fetched from API and displayed in a list
+
+### 3.5 Calculate Balance
+- Total balance is calculated dynamically:
+  - Income adds to total
+  - Expense subtracts from total
+
+---
+
+## 🔄 4. Data Flow
+
+1. User interacts with UI (Add/Edit/Delete)
+2. Redux Toolkit dispatches actions
+3. Async thunks call Laravel API
+4. API processes request and returns response
+5. Redux store updates state
+6. UI re-renders automatically
+
+---
+
+## 🗄️ 5. Data Model
+
+### Transaction Object Structure
+```json
+{
+  "id": 1,
+  "name": "Salary",
+  "type": "income",
+  "amount": 10000
+}
+```
+
+### 📁 6. Project Structure
 
 ```
 src
 │
 ├── app
-│   ├── store.js
-│   ├── hooks.js
-│   └── rootReducer.js
+│   └── store.js
+│
+├── assets
+|   ├── edit.svg
+│   └── delete.svg
+|
+├── components
+|   ├── Transactions
+│   │   ├──Transaction.jsx
+│   │   └── Transactions.jsx
+│   │
+│   ├── Balance.jsx
+│   ├── Form.jsx
+│   └── Layout.jsx
 │
 ├── features
-│   ├── cart
-│   │   ├── cartSlice.js
-│   │   ├── cartSelectors.js
-│   │   ├── cartThunks.js
-│   │   └── index.js
-│   │
-│   ├── products
-│   │   ├── productSlice.js
-│   │   ├── productSelectors.js
-│   │   ├── productAPI.js
-│   │   └── index.js
-│
-├── services
-│   └── api.js
-│
-├── components
-│   ├── Navbar.jsx
-│   └── ProductCard.jsx
-│
-├── pages
-│   ├── Home.jsx
-│   └── CartPage.jsx
+│   └── transactions
+│       ├── transactionSlice.js
+│       └── transactionAPI.js
 │
 ├── utils
 │   └── helpers.js
 │
 ├── App.jsx
 └── main.jsx
-```
-
----
-
-# 🧠 Architecture Explanation
-
-## 1. App Layer
-
-The **app folder** contains the global Redux configuration.
-
-* `store.js` → Configures Redux store
-* `rootReducer.js` → Combines all reducers
-* `hooks.js` → Custom Redux hooks
-
----
-
-## 2. Features Layer
-
-Each feature manages its own Redux logic.
-
-Example:
 
 ```
-features/cart
-```
-
-Contains:
-
-* `cartSlice.js` → Redux slice
-* `cartSelectors.js` → Selectors
-* `cartThunks.js` → Async logic
-* `index.js` → Clean exports
-
-This keeps each feature **independent and scalable**.
-
----
-
-## 3. Services Layer
-
-The **services folder** contains centralized API configurations.
-
-Example:
-
-```
-services/api.js
-```
-
-This allows all API calls to use the same configuration.
-
-Benefits:
-
-* Easier API management
-* Cleaner async code
-* Reusable request logic
-
----
-
-## 4. Components Layer
-
-Reusable UI components.
-
-Examples:
-
-* Navbar
-* ProductCard
-* Buttons
-* Layout elements
-
-These components should remain **UI focused** and avoid business logic.
-
----
-
-## 5. Pages Layer
-
-Pages represent application screens.
-
-Examples:
-
-* Home
-* Cart page
-* Product list page
-
-Pages combine components and connect them to Redux.
-
----
-
-# ⚙️ Store Configuration Example
-
-```javascript
-import { configureStore } from '@reduxjs/toolkit'
-import rootReducer from './rootReducer'
-
-export const store = configureStore({
-  reducer: rootReducer,
-  devTools: true
-})
-```
-
----
-
-# 🔄 Async Actions Example
-
-Redux Toolkit supports async logic using `createAsyncThunk`.
-
-Example:
-
-```javascript
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    const response = await api.get('/products')
-    return response.data
-  }
-)
-```
-
----
-
-# 🎯 Benefits of This Architecture
-
-* Scales well for large applications
-* Keeps Redux logic organized
-* Improves maintainability
-* Reduces code duplication
-* Makes onboarding easier for teams
-
----
-
-# 📚 Technologies Used
-
-* React
-* Redux Toolkit
-* React Redux
-* Axios (for API requests)
-
----
-
-# 💡 Best Practices
-
-* Keep components focused on UI
-* Place business logic in slices or thunks
-* Use selectors to access state
-* Keep features independent
-* Centralize API logic
-
----
-
-# 📌 Conclusion
-
-This architecture provides a **clean and scalable foundation** for building modern React applications using Redux Toolkit.
-It follows best practices used by experienced developers and helps maintain a well-structured codebase as the application grows.
-
