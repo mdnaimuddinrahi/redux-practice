@@ -11,8 +11,6 @@ export default function Transactions() {
     dispatch(fetchTransactions())
   }, [dispatch])
 
-  console.log('transactions :>> ', transactions);
-
   let content = '';
 
   if(isLoading) {

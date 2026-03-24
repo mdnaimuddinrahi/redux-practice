@@ -1,23 +1,65 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {createTransaction} from '../features/transactions/transactionSlice'
+import {changeTransaction, createTransaction} from '../features/transactions/transactionSlice'
+import { editInActive } from '../features/transactions/transactionSlice'
 
 export default function Form() {
-    const [name, setName] = useState();
-    const [type, setType] = useState();
-    const [amount, setAmount] = useState();
+    const [name, setName] = useState('');
+    const [type, setType] = useState('');
+    const [amount, setAmount] = useState('');
     const dispatch = useDispatch();
     const {isLoading, isError, error} = useSelector((state) => state.transaction)
-    console.log('{isLoading, isError, error} :>> ', {isLoading, isError, error});
+    const [editMode, setEditMode] = useState(false);
+    const editing = useSelector((state) => state.transaction.editing)
+    
+    const reset = () => {
+        setName('')
+        setType('')
+        setAmount('')
+        console.log('name, type, amount', name, type, amount)
+    }
 
     const handleCreate = (e) => {
         e.preventDefault()
-        dispatch(createTransaction({
-            name,
-            type,
-            amount: Number(amount)
-        }))
+        if (editMode) {
+            dispatch(changeTransaction({id: editing.id, data: {
+                name,
+                type,
+                amount: Number(amount)
+            }}))
+            cancelEditMode();
+        } else {
+            dispatch(createTransaction({
+                name,
+                type,
+                amount: Number(amount)
+            }))
+            reset();
+        }
+       
+        
     }
+
+    const cancelEditMode = () => {
+        setEditMode(false)
+        reset()
+        dispatch(editInActive())
+    }
+    
+    useEffect(() => {
+        const {id, name, amount, type} = editing || {};
+
+        if (id) {
+            setEditMode(true)
+            setName(name)
+            setAmount(amount)
+            setType(type)
+        } else {
+            setEditMode(false)
+            reset()
+        }
+    }, [editing])
+
     return (
         <div className="form">
             <h3>Add new transaction</h3>
@@ -29,6 +71,7 @@ export default function Form() {
                         name="name"
                         placeholder="My Salary"
                         onChange={(e) => setName(e.target.value)}
+                        value={name}
                     />
                 </div>
 
@@ -64,15 +107,16 @@ export default function Form() {
                         placeholder="300"
                         name="amount"
                         onChange={(e) => setAmount(e.target.value)}
+                        value={amount}
                     />
                 </div>
                 
-                <button disabled={isLoading} className="btn" type='submit'>Add Transaction</button>
+                <button disabled={isLoading} className="btn" type='submit'>{editMode ? 'Edit Transaction' : 'Add Transaction'}</button>
                 {!isLoading && isError && (
                     <p className="text-red-600 bg-red-100 border border-red-300 px-4 py-2 rounded-md text-sm">
                     ⚠️ Something went wrong. Please try again.
                     </p>)}
-                <button className="btn cancel_edit">Cancel Edit</button>
+                {editMode && <button className="btn cancel_edit" onClick={cancelEditMode}>Cancel Edit</button>}
             </form>
         </div>
     )
