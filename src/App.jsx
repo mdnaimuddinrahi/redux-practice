@@ -1,6 +1,6 @@
 // import './App.css'
 import { Provider } from 'react-redux';
-import Video from './pages/Video';
+import LayoutRouter from './components/Router/LayoutRouter';
 // import Home from './pages/Home';
 
 
@@ -9,8 +9,7 @@ function App() {
 
   return (
     // <Provider>
-      // <Home/>
-      <Video/>
+        <LayoutRouter/>
     // </Provider>
   )
 }
