@@ -31,7 +31,7 @@ This is a **Single Page Application (SPA)** with a RESTful backend:
 
 * **Frontend:** React + Redux Toolkit
 * **Backend:** Laravel (REST API)
-* **Communication:** HTTP (JSON आधारित API)
+* **Communication:** HTTP (JSON API)
 
 ---
 
