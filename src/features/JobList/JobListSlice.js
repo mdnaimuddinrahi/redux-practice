@@ -6,13 +6,18 @@ const initialState = {
     isLoading: false,
     isError: false,
     error: '',
-    editing: {}
+    editing: {},
+    filters: {
+        search: '',
+        sort_by_salary: '',
+        type: ''
+    },
 }
 
 export const fetchJobList = createAsyncThunk(
     'joblist/fetchJobList',
-    async () => {
-        const jobList = await getJobList()
+    async (search) => {
+        const jobList = await getJobList(search)
         return jobList
     }
 )
@@ -51,6 +56,15 @@ const jobSlice = createSlice({
         },
         editInActive: (state) => {
             state.editing = {}
+        },
+        filterBySearch: (state, action) => {
+            state.filters.search = action.payload
+        },
+        filterByType: (state, action) => {
+            state.filters.type = action.payload
+        },
+        filterBySort: (state, action) => {
+            state.filters.sort_by_salary = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -105,7 +119,7 @@ const jobSlice = createSlice({
         builder.addCase(deleteJobSeek.fulfilled, (state, action) => {
             state.isError = false
             state.isLoading = false
-            state.jobList.filter(t => t.id !== action.meta.arg)
+            state.jobList = state.jobList.filter(t => t.id !== action.meta.arg)
         })
         builder.addCase(deleteJobSeek.rejected, (state, action) => {
             state.isError = true
@@ -116,4 +130,4 @@ const jobSlice = createSlice({
 })
 
 export default jobSlice.reducer
-export const {editActive, editInActive} = jobSlice.actions;
+export const {editActive, editInActive, filterBySearch, filterBySort, filterByType} = jobSlice.actions;

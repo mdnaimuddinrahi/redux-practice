@@ -49,7 +49,7 @@ export default function JobListItem({job}) {
                     <button 
                         type="button" 
                         className="lws-delete btn btn-danger"
-                        onClick={handleDelete}>
+                        onClick={() =>handleDelete(job.id)}>
                         <i className="fa-solid fa-trash text-gray-300 -ml-1 mr-2"></i>
                         Delete
                     </button>

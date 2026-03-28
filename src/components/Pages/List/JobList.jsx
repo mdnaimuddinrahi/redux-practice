@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
 import JobListItem from './JobListItem'
-import { useEffect } from 'react'
-import { fetchJobList } from '../../../features/JobList/JobListSlice'
+import { useEffect, useState } from 'react'
+import { fetchJobList, filterBySearch, filterBySort } from '../../../features/JobList/JobListSlice'
 
 export default function JobList() {
     const dispatch = useDispatch()
-    const {jobList, isLoading, isError, error} = useSelector((state) => state.jobseeker)
+    const {jobList, filters, isLoading, isError, error} = useSelector((state) => state.jobseeker)
     useEffect(() => {
-        dispatch(fetchJobList())
-    }, [dispatch])
-
+        dispatch(fetchJobList(filters))
+    }, [dispatch, filters.search, filters.sort_by_salary])
     let content = '';
 
     if(isLoading) {
@@ -21,13 +20,12 @@ export default function JobList() {
     }
 
     if (!isError && !isLoading && jobList?.length === 0) {
-        content = <h1 className='lws-section-title'>No transactions found</h1>
+        content = <h1 className='lws-section-title'>No Jobs found</h1>
     }
 
     if (!isError && !isLoading && jobList?.length > 0) {
         content = jobList.map((job) => <JobListItem key={job.id} job={job}/>)
     }
-
 
     return (
         <div className="lg:pl-[14rem]  mt-[5.8125rem]">
@@ -37,12 +35,24 @@ export default function JobList() {
                     <div className="flex gap-4">
                         <div className="search-field group flex-1">
                             <i className="fa-solid fa-magnifying-glass search-icon group-focus-within:text-blue-500"></i>
-                            <input type="text" placeholder="Search Job" className="search-input" id="lws-searchJob"/>
+                            <input 
+                                type="text" 
+                                placeholder="Search Job" 
+                                name='search' 
+                                className="search-input" 
+                                id="lws-searchJob"
+                                onKeyDown={(e) => dispatch(filterBySearch(e.target.value))}
+                            />
                         </div>
-                        <select id="lws-sort" name="sort" autoComplete="sort" className="flex-1">
-                            <option>Default</option>
-                            <option>Salary (Low to High)</option>
-                            <option>Salary (High to Low)</option>
+                        <select 
+                            id="lws-sort" 
+                            name="sort" 
+                            onChange={(e) => dispatch(filterBySort(e.target.value))}
+                            autoComplete="sort" 
+                            className="flex-1">
+                            <option value="">Default</option>
+                            <option value="low">Salary (Low to High)</option>
+                            <option value="high">Salary (High to Low)</option>
                         </select>
                     </div>
                 </div>

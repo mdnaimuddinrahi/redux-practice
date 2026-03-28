@@ -1,14 +1,18 @@
+import { useSelector } from "react-redux"
 import axiosInstance from "../../utils/axios"
 
-export const getJobList = async () => {
-    const response = await axiosInstance.get('/job-seeker')
+export const getJobList = async (search) => {
+    const response = await axiosInstance.get('/job-seeker', 
+        {
+            params: search
+        }
+    )
     
     return response.data.data
 }
 
 export const addJobSeek = async (data) => {
     const response = await axiosInstance.post('/job-seeker', data)
-console.log('response :>> ', response);
     return response.data.data
 }
 
