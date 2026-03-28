@@ -1,6 +1,33 @@
+import { useDispatch, useSelector } from 'react-redux'
 import JobListItem from './JobListItem'
+import { useEffect } from 'react'
+import { fetchJobList } from '../../../features/JobList/JobListSlice'
 
 export default function JobList() {
+    const dispatch = useDispatch()
+    const {jobList, isLoading, isError, error} = useSelector((state) => state.jobseeker)
+    useEffect(() => {
+        dispatch(fetchJobList())
+    }, [dispatch])
+
+    let content = '';
+
+    if(isLoading) {
+        content = <h1 className='lws-section-title'>Loading...</h1>;
+    }
+
+    if(!isLoading && isError) {
+        content = <h1 className='lws-section-title'>{error}</h1>
+    }
+
+    if (!isError && !isLoading && jobList?.length === 0) {
+        content = <h1 className='lws-section-title'>No transactions found</h1>
+    }
+
+    if (!isError && !isLoading && jobList?.length > 0) {
+        content = jobList.map((job) => <JobListItem key={job.id} job={job}/>)
+    }
+
 
     return (
         <div className="lg:pl-[14rem]  mt-[5.8125rem]">
@@ -20,7 +47,7 @@ export default function JobList() {
                     </div>
                 </div>
                 <div className="jobs-list">
-                    <JobListItem/>
+                    {content}
                 </div>
             </main>
         </div>

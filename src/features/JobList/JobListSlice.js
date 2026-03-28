@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { editJobSeek, getJobList, removeJobSeek } from "./JobListApi"
+import { addJobSeek, editJobSeek, getJobList, removeJobSeek } from "./JobListApi"
 
 const initialState = {
     jobList: [],
@@ -27,8 +27,8 @@ export const createJobSeek = createAsyncThunk(
 
 export const updateJobSeek = createAsyncThunk(
     'joblist/updateJobSeek',
-    async (id, data) => {
-        const jobSeek = await editJobSeek(id, data)
+    async ({id, data}) => {
+        const jobSeek = await editJobSeek({id, data})
         return jobSeek
     }
 )
@@ -45,6 +45,14 @@ export const deleteJobSeek = createAsyncThunk(
 const jobSlice = createSlice({
     name: "joblist",
     initialState,
+    reducers: {
+        editActive: (state, action) => {
+            state.editing = action.payload
+        },
+        editInActive: (state) => {
+            state.editing = {}
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchJobList.pending, (state) => {
             state.isError = false
@@ -108,4 +116,4 @@ const jobSlice = createSlice({
 })
 
 export default jobSlice.reducer
-// export const {}
+export const {editActive, editInActive} = jobSlice.actions;

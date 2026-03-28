@@ -8,13 +8,13 @@ export const getJobList = async () => {
 
 export const addJobSeek = async (data) => {
     const response = await axiosInstance.post('/job-seeker', data)
-
+console.log('response :>> ', response);
     return response.data.data
 }
 
-export const editJobSeek = async (id, data) => {
+export const editJobSeek = async ({id, data}) => {
+    console.log({id, data});
     const response = await axiosInstance.put(`/job-seeker/${id}`, data)
-
     return response.data.data
 }
 

@@ -14,7 +14,7 @@ function LayoutRouter() {
           {/* Child Routes */}
           <Route index element={<JobList />} />
           <Route path="add-job" element={<JobForm />} />
-
+          <Route path="edit-job" element={<JobForm />} />
         </Route>
 
       </Routes>
