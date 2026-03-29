@@ -9,7 +9,21 @@ export const apiSlice = createApi({
         getVideos: builder.query({
             query: () => '/videos'
         }),
+        getVideo: builder.query({
+            query: (vedioId) => `/videos/${vedioId}`
+        }),
+        getRelatedVideos: builder.query({
+            query: ({ id, title }) => {
+                return {
+                    url: '/related-videos',
+                    params: {
+                        id,
+                        title, // RTK automatically handles array params
+                    },
+                };
+            },
+        }),
     }),
 })
 
-export const { useGetVideosQuery } = apiSlice;
+export const { useGetVideosQuery, useGetVideoQuery, useGetRelatedVideosQuery } = apiSlice;
