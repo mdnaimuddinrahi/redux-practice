@@ -1,8 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import deleteImage from "../../assets/delete.svg";
 import editImage from "../../assets/edit.svg";
+import { useDeleteVideoMutation } from "../../api/apiSlice";
+import { useEffect } from "react";
+import Error from "../ui/Error";
 
 export default function Description({video}) {
+    const [deleteVideo, {data, isLoading, isError, isSuccess, error}] = useDeleteVideoMutation()
+    const navigate = useNavigate()
+    const handleDelete = () => {
+        if(video.id) deleteVideo(video.id)
+    }
+
+    useEffect(() => {
+        if(isSuccess) navigate('/')
+    }, [isSuccess, navigate])
     
     return (
         <div>
@@ -15,22 +27,25 @@ export default function Description({video}) {
                 </h2>
 
                 <div className="flex gap-6 w-full justify-end">
-                    <div className="flex gap-1">
-                        <div className="shrink-0">
-                            <img
-                                className="w-5 block"
-                                src={editImage}
-                                alt="Edit"
-                            />
-                        </div>
+                    <div>
                         <Link to={`/videos/edit/${video.id}`}>
-                            <span className="text-sm leading-[1.7142857] text-slate-600 cursor-pointer">
-                                Edit
-                            </span>
+                            <div className="flex gap-1">
+                                <div className="shrink-0">
+                                    <img
+                                        className="w-5 block"
+                                        src={editImage}
+                                        alt="Edit"
+                                    />
+                                    
+                                    <span className="text-sm leading-[1.7142857] text-slate-600 cursor-pointer">
+                                        Edit
+                                    </span>
+                                </div>
+                            </div>
                         </Link>
                     </div>
                     <div className="flex gap-1">
-                        <div className="shrink-0">
+                        <div className="shrink-0" onClick={handleDelete}>
                             <img
                                 className="w-5 block"
                                 src={deleteImage}
@@ -47,6 +62,7 @@ export default function Description({video}) {
             <div className="mt-4 text-sm text-[#334155] dark:text-slate-400">
                 {video.description}
             </div>
+            {!isLoading && !isError && <Error message={error}/>}
         </div>
     );
 }
