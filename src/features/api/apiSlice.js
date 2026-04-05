@@ -1,9 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
+console.log(import.meta.env);
+
 export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.REACT_APP_API_URl
+        baseUrl: import.meta.env.VITE_API_URL
     }),
     tagTypes: [],
     endpoints: (builder) => ({
