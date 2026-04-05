@@ -3,10 +3,8 @@ import logoImage from "../assets/images/lws-logo-light.svg";
 import { useEffect, useState } from "react";
 import { useRegisterMutation } from "../features/auth/authApi";
 import Error from '../components/ui/Error'
-import { useDispatch } from "react-redux";
 
 export default function Register() {
-    const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
