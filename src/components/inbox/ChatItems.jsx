@@ -41,7 +41,7 @@ export default function ChatItems() {
                         name={name}
                         lastMessage={chat.message}
                         lastTime={moment(chat.timestamp).fromNow()}
-                        chatId={`inbox/${chat.id}`}
+                        chatId={chat.id}
                     />
                 </li>)
             })
