@@ -14,7 +14,6 @@ export default function ChatItems() {
     const {data, isLoading, isError, error} = useGetConversationsQuery({email, user_id})
     // decide what to renders
     let content = null;
-    console.log(data );
     
     if (isLoading) {
         content = <li className="m-2 text-center">Loading...</li>
@@ -28,7 +27,6 @@ export default function ChatItems() {
             <li className="m-2 text-center">No Conversatins Found.</li>)
     } else {
         
-        console.log('conversations :>> ', data.conversations);
         content = (
             data.conversations.map((chat, index) => {
                 const {email} = user || {}
