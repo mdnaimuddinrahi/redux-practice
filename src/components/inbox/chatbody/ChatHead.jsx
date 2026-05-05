@@ -1,8 +1,7 @@
 import getAvatar from "gravatar-url";
 import { useSelector } from "react-redux"
 
-export default function ChatHead({ avatar, name, message }) {
-    console.log('message :>> ', message);
+export default function ChatHead({ message }) {
     const {sender, receiver} = message || {}
     const {user} = useSelector(state => state.auth) || {}
     const {email} = user || {}

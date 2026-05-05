@@ -13,8 +13,26 @@ export const messagesApi = apiSlice.injectEndpoints({
                     conversationId: id
                 }
             })
+        }),
+        addMessage: builder.mutation({
+            query: (data) => {
+                console.log('data :>> ', data);
+
+                return {
+                    url: '/conversation-messages',
+                    method: 'POST',
+                    body: data
+                }
+            }
+        }),
+        editMessage: builder.mutation({
+            query: ({id, data}) => ({
+                url: `/conversation-messages/${id}`,
+                method: 'PUT',
+                body: data
+            }),
         })
     })
 });
 
-export const { useGetMessagesQuery } = messagesApi;
+export const { useGetMessagesQuery, useAddMessageMutation, useEditMessageMutation } = messagesApi;

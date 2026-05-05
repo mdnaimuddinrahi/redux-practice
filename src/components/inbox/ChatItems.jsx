@@ -22,9 +22,9 @@ export default function ChatItems() {
             <li className="m-2 text-center">
                 <Error message={error?.data} /> 
             </li>)
-    } else if (!isLoading && !isError && data.conversations.length === 0) {
+    } else if (!isLoading && !isError && data?.conversations?.length === 0) {
         content = (
-            <li className="m-2 text-center">No Conversatins Found.</li>)
+            <li className="m-2 text-center">No Conversations Found.</li>)
     } else {
         
         content = (
