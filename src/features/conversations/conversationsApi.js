@@ -47,8 +47,8 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     // }));
                     const messageData = {
                         conversation_id: conversation?.data?.data?.id,
-                        sender_id: arg.data.senderId,
-                        receiver_id: arg.data.user_id,
+                        sender_id: arg.senderId,
+                        receiver_id: arg.user_id,
                         message: conversation.data.data.message
                     }
                     console.log('messageData :>> ', messageData);

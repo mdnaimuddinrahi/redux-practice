@@ -1,12 +1,35 @@
-export default function Options() {
+import { useSelector } from "react-redux";
+import { useAddConversationMutation, useEditConversationMutation } from "../../../features/conversations/conversationsApi";
+import { useState } from "react";
+
+export default function Options({participant}) {
+    console.log('participant :>> ', participant);
+    const [message, setMessage] = useState("");
+    const [editConversation, {isSuccess: isAddConversationSuccess}] = useEditConversationMutation();
+    const { email: senderEmail, id: senderId } = useSelector((state) => state.auth.user) || {};
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+         const data = {
+            user_id: participant.receiver.id,
+            senderId,
+            message,
+        }
+        // editConversation(data);
+        editConversation({conversationId: participant.conversationId, data})
+    }
+
     return (
-        <div className="flex items-center justify-between w-full p-3 border-t border-gray-300">
+        <form  onSubmit={handleSubmit} className="flex items-center justify-between w-full p-3 border-t border-gray-300">
             <input
                 type="text"
                 placeholder="Message"
                 className="block w-full py-2 pl-4 mx-3 bg-gray-100 focus:ring focus:ring-violet-500 rounded-full outline-none focus:text-gray-700"
                 name="message"
-                required
+                    required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
             />
             <button type="submit">
                 <svg
@@ -18,6 +41,6 @@ export default function Options() {
                     <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
                 </svg>
             </button>
-        </div>
+        </form>
     );
 }
