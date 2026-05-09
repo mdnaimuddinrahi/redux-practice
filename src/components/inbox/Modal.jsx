@@ -12,7 +12,7 @@ export default function Modal({ open, control }) {
     const [conversation, setConversation] = useState(undefined);
 
     const dispatch = useDispatch();
-    const { email: myEmail, id: senderId } = useSelector((state) => state.auth.user) || {};
+    const { email: myEmail, name: myName, id: senderId } = useSelector((state) => state.auth.user) || {};
 
     const [editConversation, {isSuccess: isEditConversationSuccess}] = useEditConversationMutation();
     const [addConversation, {isSuccess: isAddConversationSuccess}] = useAddConversationMutation();
@@ -69,16 +69,31 @@ export default function Modal({ open, control }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const participantId = users?.data[0]?.id;
-        // console.log('participantId :>> ', participantId);
-        // console.log('conversation found :>> ', conversation);
-        // If conversation already exists, we can edit it to add the new message
         const data = {
             user_id: participantId,
             senderId,
             message,
+            senderEmail: myEmail,
+            receiverEmail: debouncedTo,
+            timestamp: new Date().getTime(),
+            participants: `${myEmail}-${debouncedTo}`,
+            users: [
+                {
+                    email: myEmail,
+                    id: senderId,
+                    name: myName
+                },
+                {
+                    email: debouncedTo,
+                    id: participantId,
+                    name: users?.data[0]?.name
+                }
+            ],
+            timestamp: new Date().getTime(),
         }
-        if (conversation.id) {
-            // console.log('found conversatin');
+        // console.log('data :>> ', data);
+        // console.log('conversation :>> ', conversation);
+        if (conversation?.id) {
             editConversation({
                 conversationId: conversation.id,
                 data})

@@ -14,40 +14,6 @@ export const conversationsApi = apiSlice.injectEndpoints({
             }),
 
         }),
-        addConversation: builder.mutation({ 
-            query: (data) => ({
-                url: '/conversations',
-                method: 'POST',
-                body: {
-                    user_id: data.user_id,
-                    senderId: data.senderId,
-                    message: data.message,
-                }
-            }),
-            // started
-            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-                
-                const conversation = await queryFulfilled;
-                // console.log(' add conversation :>> ', conversation.data.data);
-                // console.log('arg :>> ', arg);
-
-                if (conversation?.data?.data?.id) {
-                    // silent entry to message table
-                    // dispatch(messagesApi.util.updateQueryData('getMessages', { email: arg.email, user_id: arg.user_id }, (draft) => {
-                    //     draft.push(conversation.data);
-                    // }));
-                    const messageData = {
-                        conversation_id: conversation?.data?.data?.id,
-                        sender_id: arg.senderId,
-                        receiver_id: arg.user_id,
-                        message: conversation.data.data.message
-                    }
-                    // console.log('messageData :>> ', messageData);
-                    dispatch(messagesApi.endpoints.addMessage.initiate(messageData))
-                }
-            },
-            // end
-        }),
         getConversations: builder.query({
             query: ({email, user_id}) => {
                 if (!email || !user_id) return null;
@@ -63,19 +29,69 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     }
                 };
             },
-            
             async onQueryStarted(arg, { queryFulfilled }) {
                 try {
                     const result = await queryFulfilled;
 
                     // console.log('result :>> ', result);
-                    // console.log('response data :>> ', result.data);
+                    console.log('response data :>> ', result.data);
 
                 } catch (error) {
                     console.log('error :>> ', error);
                 }
             }
         }),
+        addConversation: builder.mutation({ 
+            query: (data) => ({
+                url: '/conversations',
+                method: 'POST',
+                body: {
+                    user_id: data.user_id,
+                    senderId: data.senderId,
+                    message: data.message,
+                }
+            }),
+            // started
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                console.log('arg :>> ', arg);
+                const patchDispatch = dispatch(
+                    // before sending the request, we are updating the cache data for getConversations by adding new conversation endpoint
+                    apiSlice.util.updateQueryData(
+                        'getConversations',
+                        { email: arg.senderEmail, user_id: arg.senderId },
+                        (draft) => {
+                            const newConversation = {
+                                id: draft.conversations.length + 1, // This is just a temporary ID. In a real application, you would use the ID returned from the server.
+                                message: arg.message,
+                                participants: arg.participants,
+                                timestamp: arg.timestamp,
+                                users: arg.users,
+                            }
+                            draft.conversations.unshift(newConversation);
+                        }
+                    )
+                );
+                try {
+                    const conversation = await queryFulfilled;
+
+                    if (conversation?.data?.data?.id) {
+                        // silent entry to message table
+                        const messageData = {
+                            conversation_id: conversation?.data?.data?.id,
+                            sender_id: arg.senderId,
+                            receiver_id: arg.user_id,
+                            message: conversation.data.data.message
+                        }
+                        // console.log('messageData :>> ', messageData);
+                        dispatch(messagesApi.endpoints.addMessage.initiate(messageData))
+                    }
+                } catch (error) {
+                    patchDispatch.undo();
+                }
+            },
+            // end
+        }),
+       
         editConversation: builder.mutation({
             query: ({conversationId, data}) => ({
                 url: `/conversations/${conversationId}`,
@@ -87,10 +103,6 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 }
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-                // optimistic cache update start
-                // console.log('email: sender::> ', arg.data.senderEmail);
-
-                // console.table('optimistic update arg :>> ', { email: arg.data.senderEmail, user_id: arg.data.senderId })
                 const patchDispatch = dispatch(
                     apiSlice.util.updateQueryData(
                         'getConversations',
@@ -111,8 +123,6 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 // optimistic update end
                 try {
                     const conversation = await queryFulfilled;
-                    // console.log('edit conversation data :>> ', conversation);
-                    // console.log('argument.data  :>> ', arg.data);
 
                     if (conversation?.data?.data?.id) {
                         const messageData = {
