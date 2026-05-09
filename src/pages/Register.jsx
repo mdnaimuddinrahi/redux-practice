@@ -18,14 +18,14 @@ export default function Register() {
     useEffect(() => {
         if (responseError?.data?.errors) {
             const errors = responseError.data.errors;
-            console.log('errors', JSON.stringify(errors));
+            // console.log('errors', JSON.stringify(errors));
 
             // get first error message
             const firstError = Object.values(errors)[0][0];
             // console.log('firstError :>> ', firstError);
             setError(firstError);
         }
-        console.log('data :>> ', data);
+        // console.log('data :>> ', data);
         if (data?.access_token && data?.user) {
             navigate('/inbox')
         }

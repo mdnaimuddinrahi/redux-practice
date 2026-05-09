@@ -10,7 +10,7 @@ import gravatarUrl from "gravatar-url";
 export default function ChatItems() {
     const {user} = useSelector((state) => state.auth) || {};
     const {email, id: user_id} = user || {};
-    console.log('user :>> ', user_id);
+    // console.log('user :>> ', user_id);
     const {data, isLoading, isError, error} = useGetConversationsQuery({email, user_id})
     // decide what to renders
     let content = null;

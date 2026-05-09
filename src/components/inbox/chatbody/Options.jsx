@@ -3,18 +3,36 @@ import { useAddConversationMutation, useEditConversationMutation } from "../../.
 import { useState } from "react";
 
 export default function Options({participant}) {
-    console.log('participant :>> ', participant);
+    // console.log('participant :>> ', participant);
     const [message, setMessage] = useState("");
     const [editConversation, {isSuccess: isAddConversationSuccess}] = useEditConversationMutation();
     const { email: senderEmail, id: senderId } = useSelector((state) => state.auth.user) || {};
 
-
+// {
+//     "id": 78,
+//     "conversationId": 28,
+//     "sender": {
+//         "id": 1,
+//         "name": "Mohammad Naim Uddin Rahi",
+//         "email": "mdnaimuddinrahi@gmail.com"
+//     },
+//     "receiver": {
+//         "id": 6,
+//         "name": "Mango Andrew",
+//         "email": "mango.andrew@gmail.com"
+//     },
+//     "message": "thi sdsdf dddf",
+//     "timestamp": 1777520374000
+// }
     const handleSubmit = (e) => {
         e.preventDefault();
          const data = {
             user_id: participant.receiver.id,
             senderId,
             message,
+            senderEmail: participant.sender.email,
+            receiverEmail: participant.receiver.email,
+            timestamp: new Date().getTime()
         }
         // editConversation(data);
         editConversation({conversationId: participant.conversationId, data})

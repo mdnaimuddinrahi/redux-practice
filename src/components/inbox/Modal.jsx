@@ -69,8 +69,8 @@ export default function Modal({ open, control }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const participantId = users?.data[0]?.id;
-        console.log('participantId :>> ', participantId);
-        console.log('conversation found :>> ', conversation);
+        // console.log('participantId :>> ', participantId);
+        // console.log('conversation found :>> ', conversation);
         // If conversation already exists, we can edit it to add the new message
         const data = {
             user_id: participantId,
@@ -78,7 +78,7 @@ export default function Modal({ open, control }) {
             message,
         }
         if (conversation.id) {
-            console.log('found conversatin');
+            // console.log('found conversatin');
             editConversation({
                 conversationId: conversation.id,
                 data})
