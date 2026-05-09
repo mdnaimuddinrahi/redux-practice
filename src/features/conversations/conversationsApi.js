@@ -58,7 +58,10 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     // before sending the request, we are updating the cache data for getConversations by adding new conversation endpoint
                     apiSlice.util.updateQueryData(
                         'getConversations',
-                        { email: arg.senderEmail, user_id: arg.senderId },
+                        { 
+                            email: arg.senderEmail,
+                            user_id: arg.senderId 
+                        },
                         (draft) => {
                             const newConversation = {
                                 id: draft.conversations.length + 1, // This is just a temporary ID. In a real application, you would use the ID returned from the server.
@@ -103,6 +106,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 }
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                console.log('arg :>> ', arg);
                 const patchDispatch = dispatch(
                     apiSlice.util.updateQueryData(
                         'getConversations',
@@ -132,7 +136,24 @@ export const conversationsApi = apiSlice.injectEndpoints({
                             message: conversation.data.data.message
                         }
                         // console.log('messageData :>> ', messageData);
-                        dispatch(messagesApi.endpoints.addMessage.initiate(messageData))
+                        
+                        const response = await dispatch(
+                                messagesApi.
+                                endpoints.
+                                addMessage.
+                                initiate(messageData)
+                            ).unwrap(); // unwrap means we want to get the actual response data or error instead of the action object
+                    
+                        // update the message in the messages cache pesimistically
+                        dispatch(
+                            messagesApi.util.updateQueryData(
+                                'getMessages',
+                                arg.conversationId.toString(),
+                                (draft) => {
+                                    draft.push(response);
+                                }
+                            )
+                         );
                     }
                 } catch (error) {
                     patchDispatch.undo();

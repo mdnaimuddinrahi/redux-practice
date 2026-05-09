@@ -12,7 +12,16 @@ export const messagesApi = apiSlice.injectEndpoints({
                     sort: "timestamp",
                     conversationId: id
                 }
-            })
+            }),
+            async onQueryStarted(arg, { queryFulfilled }) {
+                try {
+                    const result = await queryFulfilled;
+                    console.log('result :>> ', result);
+                } catch (error) {
+                    console.log('error :>> ', error);
+                }
+            }
+            
         }),
         addMessage: builder.mutation({
             query: (data) => {

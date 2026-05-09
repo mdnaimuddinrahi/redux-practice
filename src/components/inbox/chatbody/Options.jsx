@@ -6,7 +6,7 @@ export default function Options({participant}) {
     // console.log('participant :>> ', participant);
     const [message, setMessage] = useState("");
     const [editConversation, {isSuccess: isAddConversationSuccess}] = useEditConversationMutation();
-    const { email: senderEmail, id: senderId } = useSelector((state) => state.auth.user) || {};
+    const { email: senderEmail, name: senderName, id: senderId } = useSelector((state) => state.auth.user) || {};
 
 // {
 //     "id": 78,
@@ -32,9 +32,20 @@ export default function Options({participant}) {
             message,
             senderEmail: participant.sender.email,
             receiverEmail: participant.receiver.email,
-            timestamp: new Date().getTime()
+            timestamp: new Date().getTime(),
+            users: [
+                {
+                    email: senderEmail,
+                    id: senderId,
+                    name: senderName
+                },
+                {
+                    email: participant.receiver.email,
+                    id: participant.receiver.id,
+                    name: participant.receiver.name
+                }
+            ]
         }
-        // editConversation(data);
         editConversation({conversationId: participant.conversationId, data})
     }
 
