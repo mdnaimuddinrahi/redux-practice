@@ -1,9 +1,14 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAddConversationMutation, useEditConversationMutation } from "../../../features/conversations/conversationsApi";
 import { useState } from "react";
+import { useEffect } from "react";
+import echo from "../../../utils/echo";
+import { messagesApi } from "../../../features/messages/messagesApi";
+
 
 export default function Options({participant}) {
     // console.log('participant :>> ', participant);
+    const dispatch = useDispatch();
     const [message, setMessage] = useState("");
     const [editConversation, {isSuccess: isAddConversationSuccess}] = useEditConversationMutation();
     const { email: senderEmail, name: senderName, id: senderId } = useSelector((state) => state.auth.user) || {};
@@ -48,6 +53,37 @@ export default function Options({participant}) {
         }
         editConversation({conversationId: participant.conversationId, data})
     }
+
+    useEffect(() => {
+        echo.channel("chat")
+            .listen(".message.sent", (e) => {
+                // console.log("Realtime message:", e);
+                dispatch(
+                    messagesApi.util.updateQueryData(
+                        "getMessages",
+                        participant.conversationId.toString(),
+                        (draft) => {
+
+                            // prevent duplicate message
+                            const exists = draft.find(
+                                m => m.id === e.message.id
+                            );
+
+                            if (!exists) {
+                                draft.push(e.message);
+                            }
+                        }
+                    )
+                );
+                // update redux cache here
+            });
+
+        return () => {
+            console.log('leaving chat');
+            echo.leave("chat");
+        };
+
+    }, []);
 
     return (
         <form  onSubmit={handleSubmit} className="flex items-center justify-between w-full p-3 border-t border-gray-300">
