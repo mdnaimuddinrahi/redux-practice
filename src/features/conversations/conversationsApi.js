@@ -12,7 +12,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     participant_email: participantEmail
                 }
             }),
-
+            
         }),
         getConversations: builder.query({
             query: ({email, user_id}) => {
@@ -34,8 +34,69 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     const result = await queryFulfilled;
 
                     // console.log('result :>> ', result);
-                    console.log('response data :>> ', result.data);
+                    // console.log('response data :>> ', result.data);
+                    // console.log('result :>> ', result.meta.response.headers.get('X-Total-Count'));
 
+                } catch (error) {
+                    console.log('error :>> ', error);
+                }
+            },
+            transformResponse: (response, meta) => {
+                // console.log('original response :>> ', response);
+                // console.log('data', {
+                //     conversations: response.data,
+                //     totalCount: parseInt(response.meta.response.headers.get('X-Total-Count'), 10)
+                // })
+                // console.log('response :>> ', response.conversations);
+                // console.log('meta :>> ', meta.response.headers.get('X-Total-Count'));
+                return {
+                    conversations: response.conversations,
+                    totalCount: parseInt(meta.response.headers.get('X-Total-Count'), 10)
+                }
+            }
+        }),
+        getMoreConversations: builder.query({
+            query: ({email, user_id, page, limit}) => {
+                if (!email || !user_id) return null;
+
+                return {
+                    url: '/conversations',
+                    params: {
+                        email,
+                        user_id,
+                        page,
+                        limit
+                    }
+                };
+            },
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const result = await queryFulfilled;
+                    // console.log('result?.data?.conversations :>> ', result?.data?.conversations);
+                    if (result?.data?.conversations?.length > 0) {
+                        // update the conversations cache by appending the new conversations to the existing list
+                        // updated conversations cache pessimistically
+                        dispatch(
+                            conversationsApi.util.updateQueryData(
+                                'getConversations',
+                                { email: arg.email, user_id: arg.user_id },
+                                (draft) => {
+                                    if (!draft) return;
+
+                                    draft.conversations.push(...result.data.conversations);
+
+                                    draft.totalCount = result.data.totalCount;
+                                    // console.log('draft :>> ', JSON.stringify(draft));
+                                    // return [
+                                    //     ...draft,
+                                    //     ...conversations
+                                    // ];
+                                    // return [...draft, ...result.data.conversations];
+                                    // draft.conversations.push(...result.data.data.conversations);
+                                }
+                            )
+                        );
+                    }
                 } catch (error) {
                     console.log('error :>> ', error);
                 }
